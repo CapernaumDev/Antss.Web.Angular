@@ -1,0 +1,42 @@
+<div>
+  <a href="#" class="link-primary" [routerLink]="['/create-ticket']">Create Ticket</a>
+  <pre></pre>
+  <div class="row justify-content-between">
+    <div class="col-lg-5 col-md-6">
+      Search Tickets: <span filterInput filterSource #filterElement></span>
+    </div>
+    <div class="col-3">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" (change)="reload($event)" id="includeClosedInput">
+        <label class="form-check-label" for="includeClosedInput">
+          Include closed tickets
+        </label>
+      </div>
+    </div>
+    <div class="col-3 text-end">
+      Showing {{recordCount$ | async}} Tickets
+    </div>
+  </div>
+  <pre></pre>
+  <table sortable class="table table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th sortHeader ref="id">ID</th>
+        <th sortHeader ref="raisedBy">Raised By</th>
+        <th sortHeader ref="assignedTo">Assigned To</th>
+        <th sortHeader ref="ticketStatus">Status</th>
+        <th>Title</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let x of tickets$ | async; index as i; trackBy: trackTicketBy"
+      [@confirmationHighlight]="x.animation" (@confirmationHighlight.done)="animationComplete(x.animation, x.id)">
+        <td><ngb-highlight [result]="x.id.toString()" [term]="filterElement.currentValue">{{x.id}}</ngb-highlight></td>
+        <td><ngb-highlight [result]="x.raisedBy" [term]="filterElement.currentValue">{{x.raisedBy}}</ngb-highlight></td>
+        <td><ngb-highlight [result]="x.assignedTo" [term]="filterElement.currentValue">{{x.assignedTo}}</ngb-highlight></td>
+        <td><ngb-highlight [result]="x.ticketStatus" [term]="filterElement.currentValue">{{x.ticketStatus}}</ngb-highlight></td>
+        <td><ngb-highlight [result]="x.title" [term]="filterElement.currentValue">{{x.title}}</ngb-highlight></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

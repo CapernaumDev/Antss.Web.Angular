@@ -1,0 +1,33 @@
+<div>
+  <a href="#" class="link-primary" [routerLink]="['/user']">Create User</a>
+  <pre></pre>
+  <div class="row justify-content-between">
+    <div class="col-4">
+      Search Users: <span filterInput filterSource #filterElement></span>
+    </div>
+    <div class="col-4 text-end">
+      Showing {{recordCount$ | async}} Users
+    </div>
+  </div>
+  <pre></pre>
+  <table sortable class="table table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th sortHeader ref="firstName">First Name</th>
+        <th sortHeader ref=lastName>Last Name</th>
+        <th sortHeader ref="userType">Type</th>
+        <th sortHeader ref="officeName">Office</th>
+        <th>Edit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let x of users$ | async; index as i; trackBy: trackUserBy">
+        <td><ngb-highlight [result]="x.firstName" [term]="filterElement.currentValue">{{x.firstName}}</ngb-highlight></td>
+        <td><ngb-highlight [result]="x.lastName" [term]="filterElement.currentValue">{{x.lastName}}</ngb-highlight></td>
+        <td><ngb-highlight [result]="x.userType" [term]="filterElement.currentValue">{{x.userType}}</ngb-highlight></td>
+        <td><ngb-highlight [result]="x.officeName" [term]="filterElement.currentValue">{{x.officeName}}</ngb-highlight></td>
+        <td><a [routerLink]="['/user', x.id]">Edit</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

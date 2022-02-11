@@ -1,0 +1,12 @@
+<input id="{{elementId}}" type="text" class="form-control" #inputElement
+           [(ngModel)]="selectedItem"
+           [ngbTypeahead]="search"
+           [inputFormatter]="formatter"
+           [resultFormatter]="formatter"
+           [editable]="false"
+           (selectItem)="onSelect($event, inputElement)"
+           (focus)="focus$.next($any($event).target.value)"
+           (click)="click$.next($any($event).target.value)"
+           #instance="ngbTypeahead"
+           placeholder="Type to search.."
+           style="margin-top:5px;"/>
