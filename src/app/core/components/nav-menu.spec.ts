@@ -39,67 +39,67 @@ describe('NavMenuComponent', () => {
     });
 
     it('should show Login link', () => {
-      const loginLinkElement = fixture.debugElement.query(
+      const element = fixture.debugElement.query(
         By.css('[href="/login"]')
       );
   
-      expect(loginLinkElement).toBeTruthy();
+      expect(element).toBeTruthy();
     });
   
     it('should show Home link', () => {
-      const homeLinkElement = fixture.debugElement.query(
+      const element = fixture.debugElement.query(
         By.css('[href="/"]')
       );
   
-      expect(homeLinkElement).toBeTruthy();
+      expect(element).toBeTruthy();
     });
   
     it('should show Create Ticket link', () => {
-      const createTicketLinkElement = fixture.debugElement.query(
+      const element = fixture.debugElement.query(
         By.css('[href="/create-ticket"]')
       );
   
-      expect(createTicketLinkElement).toBeTruthy();
+      expect(element).toBeTruthy();
     });
 
     it('should not show Admin link', () => {
-      const createTicketLinkElement = fixture.debugElement.query(
+      const element = fixture.debugElement.query(
         By.css('[href="/user-list"]')
       );
   
-      expect(createTicketLinkElement).toBeNull();
+      expect(element).toBeNull();
     });
 
     it('should not show Tickets link', () => {
-      const createTicketLinkElement = fixture.debugElement.query(
+      const element = fixture.debugElement.query(
         By.css('[href="/ticket-list"]')
       );
   
-      expect(createTicketLinkElement).toBeNull();
+      expect(element).toBeNull();
     });
 
     it('should not show Board link', () => {
-      const createTicketLinkElement = fixture.debugElement.query(
+      const element = fixture.debugElement.query(
         By.css('[href="/ticket-board"]')
       );
   
-      expect(createTicketLinkElement).toBeNull();
+      expect(element).toBeNull();
     });
 
     it('should not show Logout link', () => {
-      const createTicketLinkElement = fixture.debugElement.query(
+      const element = fixture.debugElement.query(
         By.css('[data-test-id="logoutLink"]')
       );
   
-      expect(createTicketLinkElement).toBeNull();
+      expect(element).toBeNull();
     });
 
     it('should not show My Profile link', () => {
-      const createTicketLinkElement = fixture.debugElement.query(
+      const element = fixture.debugElement.query(
         By.css('[href="/my-profile"]')
       );
   
-      expect(createTicketLinkElement).toBeNull();
+      expect(element).toBeNull();
     });
   });
 
@@ -118,43 +118,43 @@ describe('NavMenuComponent', () => {
     });
 
     it('should not show Admin link', () => {
-      const createTicketLinkElement = fixture.debugElement.query(
+      const element = fixture.debugElement.query(
         By.css('[href="/user-list"]')
       );
   
-      expect(createTicketLinkElement).toBeNull();
+      expect(element).toBeNull();
     });
 
     it('should show Tickets link', () => {
-      const createTicketLinkElement = fixture.debugElement.query(
+      const element = fixture.debugElement.query(
         By.css('[href="/ticket-list"]')
       );
   
-      expect(createTicketLinkElement).toBeTruthy();
+      expect(element).toBeTruthy();
     });
 
     it('should show Board link', () => {
-      const createTicketLinkElement = fixture.debugElement.query(
+      const element = fixture.debugElement.query(
         By.css('[href="/ticket-board"]')
       );
   
-      expect(createTicketLinkElement).toBeTruthy();
+      expect(element).toBeTruthy();
     });
 
     it('should show Logout link', () => {
-      const createTicketLinkElement = fixture.debugElement.query(
+      const element = fixture.debugElement.query(
         By.css('[data-test-id="logoutLink"]')
       );
   
-      expect(createTicketLinkElement).toBeTruthy();
+      expect(element).toBeTruthy();
     });
 
     it('should show My Profile link', () => {
-      const createTicketLinkElement = fixture.debugElement.query(
+      const element = fixture.debugElement.query(
         By.css('[href="/my-profile"]')
       );
   
-      expect(createTicketLinkElement).toBeTruthy();
+      expect(element).toBeTruthy();
     });
   });
 
@@ -174,11 +174,11 @@ describe('NavMenuComponent', () => {
     });
 
     it('should show Admin link', () => {
-      const createTicketLinkElement = fixture.debugElement.query(
+      const element = fixture.debugElement.query(
         By.css('[href="/user-list"]')
       );
   
-      expect(createTicketLinkElement).toBeTruthy();
+      expect(element).toBeTruthy();
     });
   });
 });
