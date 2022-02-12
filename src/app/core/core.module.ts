@@ -4,7 +4,7 @@ import { NavMenuComponent } from '@app/core/components/nav-menu.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { fas, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { BaseFormComponent } from './components/base-form-component';
 import { PreventDoubleSubmitDirective } from './directives/prevent-double-submit.directive';
 import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
@@ -47,7 +47,6 @@ import { FilterSourceDirective } from './directives/filter-source.directive';
 
 export class CoreModule { 
   constructor(library: FaIconLibrary) {
-    library.addIconPacks(fas);
-    library.addIcons(faUserCircle);
+    library.addIcons(faUserCircle, faEnvelope);
   }
 }

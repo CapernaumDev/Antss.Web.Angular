@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { faUserCircle, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faUserCircle } from '@fortawesome/free-solid-svg-icons/faUserCircle';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons/faEnvelope';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { CurrentUser } from '../models/user/current-user';
