@@ -8,6 +8,21 @@ import {
 } from '@angular/platform-browser-dynamic/testing';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterTestingModule } from '@angular/router/testing';
+import { MockInstance, ngMocks } from 'ng-mocks';
+
+// auto spy
+ngMocks.autoSpy('jasmine');
+// in case of jest
+// ngMocks.autoSpy('jest');
+
+// auto restore for jasmine and jest <27
+// declare const jasmine: any;
+jasmine.getEnv().addReporter({
+  specDone: MockInstance.restore,
+  specStarted: MockInstance.remember,
+  suiteDone: MockInstance.restore,
+  suiteStarted: MockInstance.remember,
+});
 
 declare const require: {
   context(path: string, deep?: boolean, filter?: RegExp): {
