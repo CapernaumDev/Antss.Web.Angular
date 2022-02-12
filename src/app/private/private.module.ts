@@ -35,7 +35,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     NgxEditorModule,
     NgbTypeaheadModule,
     DragDropModule,
-    RouterModule.forChild([
+    RouterModule.forRoot([
       { path: 'user-list', component: UserListComponent, canActivate: [AuthGuard], data: { role: ['Admin'], reuse: true }  },
       { path: 'user', component: UserComponent, canActivate: [AuthGuard], data: { role: ['Admin'] }  },
       { path: 'user/:id', component: UserComponent, canActivate: [AuthGuard], data: { role: ['Admin'] }  },

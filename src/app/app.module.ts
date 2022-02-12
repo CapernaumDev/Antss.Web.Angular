@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { AppStartup } from './core/app.startup';
 import { CoreModule } from './core/core.module';
 import { PublicModule } from './public/public.module';
+import { PrivateModule } from './private/private.module';
 import { RouteReuseStrategy, RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -27,6 +28,7 @@ import { metaReducers } from './core/store/logger-metareducer';
     HttpClientModule,
     CoreModule,
     PublicModule,
+    PrivateModule,
     StoreModule.forRoot({ }),
     StoreModule.forFeature('app', Reducers, { metaReducers }),
     EffectsModule.forRoot([Effects]),

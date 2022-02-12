@@ -22,11 +22,7 @@ import { CoreModule } from '@app/core/core.module';
     BrowserAnimationsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'login', component: LoginComponent },
-      {
-        path: '',
-          loadChildren: () => import('../private/private.module').then(mod => mod.PrivateModule)
-      }
+      { path: 'login', component: LoginComponent }
     ])
   ],
   exports: [
