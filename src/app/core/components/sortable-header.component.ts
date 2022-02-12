@@ -6,7 +6,7 @@ import { SortableDirective } from "@app/core/directives/sortable.directive";
   template: `
     <div class="sort-col">
       <ng-content></ng-content>
-      <div [ngClass]="{
+      <div data-test-id="showSortOrder" [ngClass]="{
           arrow: true,
           hide: sortable?.active !== ref || sortable?.direction === null,
           asc: sortable?.active === ref && sortable?.direction === 'asc',
