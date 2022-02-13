@@ -9,6 +9,7 @@ import {
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MockInstance, ngMocks } from 'ng-mocks';
+import { FormsModule } from '@angular/forms';
 
 // auto spy
 ngMocks.autoSpy('jasmine');
@@ -35,7 +36,8 @@ declare const require: {
 getTestBed().initTestEnvironment([
     BrowserDynamicTestingModule,
     FontAwesomeModule,
-    RouterTestingModule
+    RouterTestingModule,
+    FormsModule
   ],
   platformBrowserDynamicTesting()
 );
