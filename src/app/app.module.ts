@@ -17,6 +17,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { CacheRouteReuseStrategy } from './core/cache-route-reuse-strategy ';
 import { metaReducers } from './core/store/logger-metareducer';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { CustomSerializer } from './core/store/custom-serializer';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,9 @@ import { metaReducers } from './core/store/logger-metareducer';
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production
+    }),
+    StoreRouterConnectingModule.forRoot({
+      serializer: CustomSerializer,
     })
   ],
   providers: [
