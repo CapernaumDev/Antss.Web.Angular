@@ -1,12 +1,11 @@
 import * as ApiActions from './actions-api';
-import * as PushActions from './actions-push';
 import * as SystemActions from './actions-system';
 import * as UiActions from './actions-ui';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import { of } from 'rxjs';
-import { switchMap, map, catchError, tap, withLatestFrom, take, mergeMap } from 'rxjs/operators';
+import { switchMap, map, catchError, tap, withLatestFrom, take } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { AppState } from './app.state';
 import { ApiService } from '../api.service';
@@ -14,16 +13,22 @@ import { Router } from '@angular/router';
 import { SignalRService } from '../signalr.service';
 import { selectAfterLoginRedirect, selectCurrentUser, selectPreviousUrl } from './selectors';
 import { UpdateTicketStatus } from '../models/ticket/update-ticket-status';
+import { DOCUMENT } from '@angular/common';
 
 @Injectable()
 export class Effects {
+    private window: Window;
+
     constructor(
         private actions$: Actions,
         private store: Store<AppState>,
         private apiService: ApiService,
         private router: Router,
-        public signalRService: SignalRService
-    ) { }
+        public signalRService: SignalRService,
+        @Inject(DOCUMENT) private document: Document
+    ) {
+        this.window = this.document.defaultView as Window;
+     }
 
     login$ = createEffect(() =>
         this.actions$.pipe(
@@ -31,7 +36,7 @@ export class Effects {
             switchMap((action) => {
                 return this.apiService.login(action.loginCredential).pipe(
                     map((loginResult) => ApiActions.loginSuccess({ loginResult: loginResult })),
-                    catchError((error) => of(ApiActions.loginFailure({ message: error })))
+                    catchError((error) => of(ApiActions.loginFailure({ message: error.message })))
                 )
             })
         )
@@ -43,7 +48,7 @@ export class Effects {
             withLatestFrom(this.store.select(selectAfterLoginRedirect), this.store.select(selectCurrentUser)),
             tap(([action, afterLoginRedirect, currentUser]) => {
                 if (action.loginResult.accessToken)
-                    localStorage["access-token"] = JSON.stringify(action.loginResult.accessToken);
+                    localStorage.setItem("access-token", action.loginResult.accessToken);
 
                 this.signalRService.startConnection(currentUser?.id);
                 this.router.navigateByUrl(afterLoginRedirect);
@@ -55,8 +60,8 @@ export class Effects {
         this.actions$.pipe(
             ofType(SystemActions.logoutOnServerUnauthorised, UiActions.logoutUserInitiated),
             tap(() => {
-                localStorage["access-token"] = JSON.stringify(null);
-                window.location.href = "/"; //TODO: clear the state instead
+                localStorage.removeItem("access-token");
+                this.window.location.href = "/"; //TODO: clear the state instead
             }), take(1)
         ),
     );

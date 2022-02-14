@@ -14,12 +14,9 @@ export class AppStartup {
   }
 
   startup() {
-    let tokenStringValue = localStorage["access-token"]
-    if (!tokenStringValue) return;
+    let token = localStorage["access-token"]
+    if (!token || token == 'undefined' || token == 'null') return;
 
-    let token = JSON.parse(tokenStringValue);
-    if (!token) return;
-    
     let loginCredential = new LoginCredential();
     loginCredential.accessToken = token;
     this.store.dispatch(loginWithToken({loginCredential: loginCredential }));

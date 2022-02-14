@@ -32,7 +32,7 @@ export class SignalRService {
 
         this.hubConnection = new signalR.HubConnectionBuilder()
             .withUrl(environment.signalrUrl, { 
-                accessTokenFactory: () => window.btoa(JSON.parse(localStorage["access-token"]))
+                accessTokenFactory: () => window.btoa(localStorage["access-token"])
             },)
             .withAutomaticReconnect()
             .configureLogging(environment.production ? signalR.LogLevel.None : signalR.LogLevel.Debug)
