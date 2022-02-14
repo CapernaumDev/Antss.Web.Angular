@@ -1,10 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { RouterTestingModule } from '@angular/router/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { MockComponent, MockComponents } from 'ng-mocks';
 import { CurrentUser } from '../models/user/current-user';
 import { selectCurrentUser } from '../store/selectors';
 
 import { NavMenuComponent } from './nav-menu.component';
+
 
 describe('NavMenuComponent', () => {
   let component: NavMenuComponent;
@@ -104,8 +107,9 @@ describe('NavMenuComponent', () => {
   });
 
   describe("when logged in not as admin", () => {
+    let mockStore: MockStore;
     beforeEach(() => {
-      const mockStore = TestBed.inject(MockStore);
+      mockStore = TestBed.inject(MockStore);
       const user = new CurrentUser();
       user.id = 1;
       const mockCurrentUserState = mockStore.overrideSelector(
@@ -115,6 +119,18 @@ describe('NavMenuComponent', () => {
       fixture = TestBed.createComponent(NavMenuComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
+    });
+
+    it('should dispatch logout action when logout link is clicked', () => {
+      spyOn(mockStore, 'dispatch').and.stub();
+      const logoutLink = fixture.debugElement.query(
+        By.css('[data-test-id="logoutLink"]')
+      );
+      logoutLink.nativeElement.click();
+
+      expect(mockStore.dispatch).toHaveBeenCalledOnceWith({
+        type: '[Nav Menu] Logout'
+      });
     });
 
     it('should not show Admin link', () => {
