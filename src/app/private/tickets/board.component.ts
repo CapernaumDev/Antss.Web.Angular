@@ -16,11 +16,11 @@ import { selectTicketBoard } from '@app/core/store/selectors';
   selector: 'app-ticket-board',
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [TicketBoardDataSource]
 })
 
 export class TicketBoardComponent {
-  boardDataSource = new TicketBoardDataSource([]);
   board$: Observable<BoardColumn<TicketListItem>[]> = this.boardDataSource.data$;
   recordCount$: Observable<number> = this.boardDataSource.recordCount$;
   filterTerm!: string;
@@ -28,7 +28,7 @@ export class TicketBoardComponent {
   @ViewChild(FilterSourceDirective) filterSource!: FilterSourceDirective;
   @ViewChild('filterElement') filterElement!: FilterInputComponent;
 
-  constructor(private store: Store<AppState>){
+  constructor(private store: Store<AppState>, private boardDataSource: TicketBoardDataSource){
     this.store.dispatch(loadTicketBoardRequested({ includeClosed: false })); 
     this.boardDataSource.setDataSource(this.store.select(selectTicketBoard));  
   }

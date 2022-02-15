@@ -4,7 +4,9 @@ import { TicketListItem } from "../../core/models/ticket/ticket-list-item";
 import { DataSource } from "../../core/data-source";
 import { BoardColumn } from "@app/core/models/board-column";
 import { Subject, Subscription } from "rxjs";
+import { Injectable } from "@angular/core";
 
+@Injectable()
 export class TicketBoardDataSource extends DataSource<BoardColumn<TicketListItem>> {
   private ticketCount = new Subject<number>();
   private subscriptions: Subscription[] = [];

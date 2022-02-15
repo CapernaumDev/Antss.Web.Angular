@@ -16,11 +16,11 @@ import confirmationHighlightAnimation from '@app/core/animations/confirmation-hi
   selector: 'ticket-list',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './ticket-list.component.html',
-  animations: confirmationHighlightAnimation
+  animations: confirmationHighlightAnimation,
+  providers: [TicketListDataSource]
 })
 
 export class TicketListComponent {
-  ticketsDataSource = new TicketListDataSource([]);
   tickets$: Observable<TicketListItem[]> = this.ticketsDataSource.data$;
   recordCount$: Observable<number> = this.ticketsDataSource.recordCount$;
   
@@ -28,7 +28,7 @@ export class TicketListComponent {
   @ViewChild(FilterSourceDirective) filterSource!: FilterSourceDirective;
   @ViewChild('filterElement') filterElement!: FilterInputComponent;
 
-  constructor(private store: Store<AppState>) { 
+  constructor(private store: Store<AppState>, private ticketsDataSource: TicketListDataSource) { 
     this.store.dispatch(loadTicketsRequested({ includeClosed: false })); 
     this.ticketsDataSource.setDataSource(this.store.select(selectTicketList));  
   }

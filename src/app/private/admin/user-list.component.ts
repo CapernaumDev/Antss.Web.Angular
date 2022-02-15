@@ -14,10 +14,10 @@ import { selectUserList } from '@app/core/store/selectors';
   selector: 'user-list',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './user-list.component.html',
+  providers: [UserListDataSource]
 })
 
 export class UserListComponent {
-  usersDataSource = new UserListDataSource([]);
   users$: Observable<UserListItem[]> = this.usersDataSource.data$;
   recordCount$: Observable<number> = this.usersDataSource.recordCount$;
 
@@ -25,7 +25,7 @@ export class UserListComponent {
   @ViewChild(FilterSourceDirective) filterSource!: FilterSourceDirective;
   @ViewChild('filterElement') filterElement!: FilterInputComponent;
 
-  constructor(private store: Store<AppState>) { 
+  constructor(private store: Store<AppState>, private usersDataSource: UserListDataSource) { 
     this.store.dispatch(loadUserListRequested()); 
     this.usersDataSource.setDataSource(this.store.select(selectUserList)); 
   }

@@ -2,7 +2,9 @@ import { SetFilterEvent } from "../../core/interfaces/set-filter-event";
 import { SortChangeEvent } from "../../core/interfaces/sort-change-event";
 import { TicketListItem } from "../../core/models/ticket/ticket-list-item";
 import { DataSource } from "../../core/data-source";
+import { Injectable } from "@angular/core";
 
+@Injectable()
 export class TicketListDataSource extends DataSource<TicketListItem> {
     sortLogic({ column, direction }: SortChangeEvent, data: TicketListItem[]) {
         let sorted = data;
