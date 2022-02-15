@@ -1,8 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { RouterTestingModule } from '@angular/router/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { MockComponent, MockComponents } from 'ng-mocks';
 import { CurrentUser } from '../models/user/current-user';
 import { selectCurrentUser } from '../store/selectors';
 

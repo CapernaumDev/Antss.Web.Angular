@@ -14,9 +14,10 @@ export class AuthGuard implements CanActivate {
     private store: Store<AppState>
   ) { }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     return new Observable<boolean>(obs => {
-      let routeRole = route.data["role"] as string;
+      console.log(route);
+      let routeRole = route.data?.["role"] as string;
       let redirectAfterLogin = route.url.toString();
 
       this.store.select(selectCurrentUser).pipe(
@@ -24,15 +25,11 @@ export class AuthGuard implements CanActivate {
       ).subscribe(user => {
         if (!user) {
           this.store.dispatch(setAfterLoginRedirect({ url: redirectAfterLogin }));
-          obs.next(false);
           this.router.navigate(['login']);
+          obs.next(false);
+        } else if (routeRole && routeRole.includes('Admin') && !user.isAdmin) {
+          obs.next(false);
         } else {
-          if (routeRole && routeRole.includes('Admin') && !user.isAdmin) {
-            obs.next(false);
-            this.router.navigate(['']);
-            return;
-          }
-
           obs.next(true);
         }
       })
