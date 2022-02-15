@@ -16,7 +16,6 @@ export class AuthGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     return new Observable<boolean>(obs => {
-      console.log(route);
       let routeRole = route.data?.["role"] as string;
       let redirectAfterLogin = route.url.toString();
 
