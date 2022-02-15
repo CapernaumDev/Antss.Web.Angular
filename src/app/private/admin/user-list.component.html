@@ -1,14 +1,7 @@
 <div>
   <a href="#" class="link-primary" [routerLink]="['/user']">Create User</a>
   <pre></pre>
-  <div class="row justify-content-between">
-    <div class="col-4">
-      Search Users: <span filterInput filterSource #filterElement></span>
-    </div>
-    <div class="col-4 text-end">
-      Showing {{recordCount$ | async}} Users
-    </div>
-  </div>
+  <filter-section [dataSource]="usersDataSource" subjectNamePlural="Users"></filter-section>
   <pre></pre>
   <table sortable class="table table-striped">
     <thead class="table-dark">
@@ -20,12 +13,12 @@
         <th>Edit</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody *ngIf="{filterTerm: (filterTerm$ | async) || ''} as filter"> <!--TODO: ngrxPush Pipe / ngrxLet  --> 
       <tr *ngFor="let x of users$ | async; index as i; trackBy: trackUserBy">
-        <td><ngb-highlight [result]="x.firstName" [term]="filterElement.currentValue">{{x.firstName}}</ngb-highlight></td>
-        <td><ngb-highlight [result]="x.lastName" [term]="filterElement.currentValue">{{x.lastName}}</ngb-highlight></td>
-        <td><ngb-highlight [result]="x.userType" [term]="filterElement.currentValue">{{x.userType}}</ngb-highlight></td>
-        <td><ngb-highlight [result]="x.officeName" [term]="filterElement.currentValue">{{x.officeName}}</ngb-highlight></td>
+        <td><ngb-highlight [result]="x.firstName" [term]="filter.filterTerm">{{x.firstName}}</ngb-highlight></td>
+        <td><ngb-highlight [result]="x.lastName" [term]="filter.filterTerm">{{x.lastName}}</ngb-highlight></td>
+        <td><ngb-highlight [result]="x.userType" [term]="filter.filterTerm">{{x.userType}}</ngb-highlight></td>
+        <td><ngb-highlight [result]="x.officeName" [term]="filter.filterTerm">{{x.officeName}}</ngb-highlight></td>
         <td><a [routerLink]="['/user', x.id]">Edit</a></td>
       </tr>
     </tbody>

@@ -13,6 +13,7 @@ import { SortableDirective } from './directives/sortable.directive';
 import { SortableHeaderComponent } from './components/sortable-header.component';
 import { FilterInputComponent } from './components/filter-input.component';
 import { FilterSourceDirective } from './directives/filter-source.directive';
+import { FilterSectionComponent } from './components/filter-section.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { FilterSourceDirective } from './directives/filter-source.directive';
     AutocompleteFormControl,
     PreventDoubleSubmitDirective,
     SortableDirective,
-    FilterSourceDirective
+    FilterSourceDirective,
+    FilterSectionComponent
   ],
   imports: [
     CommonModule,
@@ -41,7 +43,8 @@ import { FilterSourceDirective } from './directives/filter-source.directive';
     AutocompleteFormControl,
     PreventDoubleSubmitDirective,
     SortableDirective,
-    FilterSourceDirective
+    FilterSourceDirective,
+    FilterSectionComponent
   ]
 })
 

@@ -14,9 +14,10 @@ export class FilterInputComponent implements OnInit {
   public currentValue: string = '';
   private filterTerm$ = new Subject<string>();
   private subscription!: Subscription;
-
+  
   filterUpdated(event: Event) {
-    this.filterTerm$.next((event?.currentTarget as HTMLInputElement)?.value || '');
+    const filterTerm = (event?.currentTarget as HTMLInputElement)?.value || '';
+    this.filterTerm$.next(filterTerm);
   }
 
   constructor(public filter: FilterSourceDirective) { }

@@ -16,6 +16,9 @@ export abstract class DataSource<T> {
   private recordCount = new Subject<number>();
   recordCount$ = this.recordCount.asObservable();
 
+  private filterTerm = new Subject<string>();
+  filterTerm$ = this.filterTerm.asObservable();
+
   private lastSortEvent?: SortChangeEvent;
   private lastFilterEvent?: SetFilterEvent;
 
@@ -105,7 +108,10 @@ export abstract class DataSource<T> {
     const sub = filterSource.filterChange
       .pipe(
         withLatestFrom(this.initialData$),
-        tap(([setFilterEvent]) => this.lastFilterEvent = setFilterEvent),
+        tap(([setFilterEvent]) => { 
+          this.lastFilterEvent = setFilterEvent;
+          this.filterTerm.next(setFilterEvent.filterTerm);
+         }),
         map(([setFilterEvent, data]) => this.filterLogic(setFilterEvent, data))
       )
       .subscribe((data) => { 
