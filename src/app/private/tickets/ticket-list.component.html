@@ -34,19 +34,19 @@
           detection problem when component is reloaded from previously stored route (table displays rows no longer 
           present in data source). There is no scope in table to add an extra child element to wrap. Maybe make this a grid instead -->
         <td [@confirmationHighlight]="x.animation" (@confirmationHighlight.done)="animationComplete(x.animation, x.id)">
-          <ngb-highlight [result]="x.id.toString()" [term]="filterElement.currentValue">{{x.id}}</ngb-highlight>
+          <ngb-highlight [result]="x.id.toString()" [term]="filterElement.currentValue"></ngb-highlight>
         </td>
         <td [@confirmationHighlight]="x.animation">
-          <ngb-highlight [result]="x.raisedBy" [term]="filterElement.currentValue">{{x.raisedBy}}</ngb-highlight>
+          <ngb-highlight [result]="x.raisedBy" [term]="filterElement.currentValue"></ngb-highlight>
         </td>
         <td [@confirmationHighlight]="x.animation">
-          <ngb-highlight [result]="x.assignedTo" [term]="filterElement.currentValue">{{x.assignedTo}}</ngb-highlight>
+          <ngb-highlight [result]="x.assignedTo" [term]="filterElement.currentValue"></ngb-highlight>
         </td>
         <td [@confirmationHighlight]="x.animation">
-          <ngb-highlight [result]="x.ticketStatus" [term]="filterElement.currentValue">{{x.ticketStatus}}</ngb-highlight>
+          <ngb-highlight [result]="x.ticketStatus" [term]="filterElement.currentValue"></ngb-highlight>
         </td>
         <td [@confirmationHighlight]="x.animation">
-          <ngb-highlight [result]="x.title" [term]="filterElement.currentValue">{{x.title}}</ngb-highlight>
+          <ngb-highlight [result]="x.title" [term]="filterElement.currentValue"></ngb-highlight>
         </td>
       </tr>
     </tbody>
