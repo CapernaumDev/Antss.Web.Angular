@@ -17,7 +17,6 @@ import { selectUserList } from '@app/core/store/selectors';
 
 export class UserListComponent {
   users$: Observable<UserListItem[]> = this.usersDataSource.data$;
-  recordCount$: Observable<number> = this.usersDataSource.recordCount$;
   filterTerm$: Observable<string> = this.usersDataSource.filterTerm$;
 
   @ViewChild(SortableDirective) sorter!: SortableDirective;

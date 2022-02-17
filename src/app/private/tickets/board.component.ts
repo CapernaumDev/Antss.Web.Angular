@@ -6,8 +6,6 @@ import { BoardColumn } from '@app/core/models/board-column';
 import { TicketListItem } from '@app/core/models/ticket/ticket-list-item';
 import { Observable } from 'rxjs';
 import { TicketBoardDataSource } from './board-data-source';
-import { FilterSourceDirective } from '@app/core/directives/filter-source.directive';
-import { FilterInputComponent } from '@app/core/components/filter-input.component';
 import { AppState } from '@app/core/store/app.state';
 import { loadTicketBoardRequested, ticketStatusUpdatedByUser } from '@app/core/store/actions-ui';
 import { selectTicketBoard } from '@app/core/store/selectors';
@@ -22,13 +20,9 @@ import { selectTicketBoard } from '@app/core/store/selectors';
 
 export class TicketBoardComponent {
   board$: Observable<BoardColumn<TicketListItem>[]> = this.boardDataSource.data$;
-  recordCount$: Observable<number> = this.boardDataSource.recordCount$;
-  filterTerm!: string;
+  filterTerm$: Observable<string> = this.boardDataSource.filterTerm$;
 
-  @ViewChild(FilterSourceDirective) filterSource!: FilterSourceDirective;
-  @ViewChild('filterElement') filterElement!: FilterInputComponent;
-
-  constructor(private store: Store<AppState>, private boardDataSource: TicketBoardDataSource){
+  constructor(private store: Store<AppState>, public boardDataSource: TicketBoardDataSource){
     this.store.dispatch(loadTicketBoardRequested({ includeClosed: false })); 
     this.boardDataSource.setDataSource(this.store.select(selectTicketBoard));  
   }
@@ -58,14 +52,6 @@ export class TicketBoardComponent {
   reload(event: Event) {
     let target = event.target as HTMLInputElement;
     this.store.dispatch(loadTicketBoardRequested({ includeClosed: target.checked }))
-  }
-
-  ngAfterViewInit() {
-    this.boardDataSource.filterSource = this.filterSource;
-    this.filterSource.filterChange
-      .subscribe((setFilterEvent) => { 
-        this.filterTerm = setFilterEvent.filterTerm || '';
-      });    
   }
 
   ngOnDestroy() {

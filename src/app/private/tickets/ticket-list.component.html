@@ -1,10 +1,7 @@
 <div>
   <a href="#" class="link-primary" [routerLink]="['/create-ticket']">Create Ticket</a>
   <pre></pre>
-  <div class="row justify-content-between">
-    <div class="col-lg-5 col-md-6">
-      Search Tickets: <span filterInput filterSource #filterElement></span>
-    </div>
+  <filter-section [dataSource]="ticketsDataSource" subjectNamePlural="Tickets">
     <div class="col-3">
       <div class="form-check">
         <input class="form-check-input" type="checkbox" (change)="reload($event)" id="includeClosedInput">
@@ -13,10 +10,7 @@
         </label>
       </div>
     </div>
-    <div class="col-3 text-end">
-      Showing {{recordCount$ | async}} Tickets
-    </div>
-  </div>
+  </filter-section>
   <pre></pre>
   <table sortable class="table table-striped">
     <thead class="table-dark">
@@ -28,25 +22,25 @@
         <th>Title</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody *ngIf="{filterTerm: (filterTerm$ | async) || ''} as filter"> <!--TODO: ngrxPush Pipe / ngrxLet  -->
       <tr *ngFor="let x of tickets$ | async; index as i; trackBy: trackTicketBy">
         <!-- NB! animations on tds because animation on *ngFor element or preceeding ng-container causes change
           detection problem when component is reloaded from previously stored route (table displays rows no longer 
           present in data source). There is no scope in table to add an extra child element to wrap. Maybe make this a grid instead -->
         <td [@confirmationHighlight]="x.animation" (@confirmationHighlight.done)="animationComplete(x.animation, x.id)">
-          <ngb-highlight [result]="x.id.toString()" [term]="filterElement.currentValue"></ngb-highlight>
+          <ngb-highlight [result]="x.id.toString()" [term]="filter.filterTerm"></ngb-highlight>
         </td>
         <td [@confirmationHighlight]="x.animation">
-          <ngb-highlight [result]="x.raisedBy" [term]="filterElement.currentValue"></ngb-highlight>
+          <ngb-highlight [result]="x.raisedBy" [term]="filter.filterTerm"></ngb-highlight>
         </td>
         <td [@confirmationHighlight]="x.animation">
-          <ngb-highlight [result]="x.assignedTo" [term]="filterElement.currentValue"></ngb-highlight>
+          <ngb-highlight [result]="x.assignedTo" [term]="filter.filterTerm"></ngb-highlight>
         </td>
         <td [@confirmationHighlight]="x.animation">
-          <ngb-highlight [result]="x.ticketStatus" [term]="filterElement.currentValue"></ngb-highlight>
+          <ngb-highlight [result]="x.ticketStatus" [term]="filter.filterTerm"></ngb-highlight>
         </td>
         <td [@confirmationHighlight]="x.animation">
-          <ngb-highlight [result]="x.title" [term]="filterElement.currentValue"></ngb-highlight>
+          <ngb-highlight [result]="x.title" [term]="filter.filterTerm"></ngb-highlight>
         </td>
       </tr>
     </tbody>

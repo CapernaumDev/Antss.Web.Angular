@@ -3,6 +3,9 @@
   <div class="col-4">
     Search {{subjectNamePlural}}: <span filterInput filterSource></span>
   </div>
+  <ng-content>
+    
+  </ng-content>
   <div class="col-4 text-end">
     Showing {{recordCount$ | async}} {{subjectNamePlural}}
   </div>

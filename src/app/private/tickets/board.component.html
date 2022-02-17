@@ -1,8 +1,5 @@
 <div class="root">
-  <div class="row justify-content-between">
-    <div class="col-lg-5 col-md-6">
-      Search Tickets: <span filterInput filterSource #filterElement></span>
-    </div>
+  <filter-section [dataSource]="boardDataSource" subjectNamePlural="Tickets">
     <div class="col-3">
       <div class="form-check">
         <input class="form-check-input" type="checkbox" (change)="reload($event)" id="includeClosedInput">
@@ -11,10 +8,7 @@
         </label>
       </div>
     </div>
-    <div class="col-3 text-end">
-      Showing {{recordCount$ | async}} Tickets
-    </div>
-  </div>
+  </filter-section>
   <div class="board">
     <div class="board-wrapper">
       <div cdkDropList cdkDropListOrientation="horizontal" class="board-columns">
@@ -24,9 +18,10 @@
             {{ column.title }}
           </div>
           <div class="tasks-container" id="{{column.id}}" [cdkDropListConnectedTo]="['1', '2', '3']" cdkDropList
-            [cdkDropListData]="column" (cdkDropListDropped)="drop($event)">
+            [cdkDropListData]="column" (cdkDropListDropped)="drop($event)"
+            *ngIf="{filterTerm: (filterTerm$ | async) || ''} as filter">
             <div board-item *ngFor="let ticket of column.items as TicketListItem; index as i; trackBy: trackTicketBy"
-              [ticket]="ticket" [filterTerm]="filterTerm" cdkDrag>
+              [ticket]="ticket" [filterTerm]="filter.filterTerm" cdkDrag>
             </div>
           </div>
 
