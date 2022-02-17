@@ -26,7 +26,7 @@
             </li>
             <li class="nav-item" *ngIf="user.isLoggedIn" [routerLinkActive]="['link-active']">
               <a [routerLink]="'my-profile'" [title]="user.firstName + ' ' + user.lastName">
-                <button class="btn btn-outline-primary link-button">
+                <button class="btn btn-sm btn-outline-primary link-button">
                   <fa-icon [icon]="faUserCircle" ></fa-icon>
                 </button>
               </a>
@@ -35,7 +35,7 @@
           </ng-container>
           <li class="nav-item" [routerLinkActive]="['link-active']">
             <a [routerLink]="['create-ticket']" class="envelope-icon">
-              <button class="btn btn-outline-primary link-button">
+              <button class="btn btn-sm btn-outline-primary link-button">
                 <fa-icon [icon]="faEnvelope" title="Create Ticket"></fa-icon>
               </button> 
             </a>

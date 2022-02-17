@@ -1,5 +1,5 @@
 <div class="root">
-  <filter-section [dataSource]="boardDataSource" subjectNamePlural="Tickets">
+  <filter-section [dataSource]="boardDataSource" subjectNamePlural="Tickets" subjectNameSingular="Ticket" newItemRoute="/create-ticket">
     <div class="col">
       <div class="form-check">
         <input class="form-check-input" type="checkbox" (change)="reload($event)" id="includeClosedInput">

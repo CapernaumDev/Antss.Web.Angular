@@ -1,7 +1,5 @@
 <div>
-  <a href="#" class="link-primary" [routerLink]="['/user']">Create User</a>
-  <pre></pre>
-  <filter-section [dataSource]="usersDataSource" subjectNamePlural="Users"></filter-section>
+  <filter-section [dataSource]="usersDataSource" subjectNamePlural="Users" subjectNameSingular="User" newItemRoute="/user"></filter-section>
   <pre></pre>
   <table sortable class="table table-striped">
     <thead class="table-dark">

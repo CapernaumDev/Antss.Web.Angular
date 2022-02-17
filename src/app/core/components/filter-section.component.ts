@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DataSource } from '../data-source';
 import { FilterSourceDirective } from '../directives/filter-source.directive';
+import { faPlusSquare } from '@fortawesome/free-solid-svg-icons/faPlusSquare';
 
 @Component({
   selector: 'filter-section',
@@ -10,6 +11,7 @@ import { FilterSourceDirective } from '../directives/filter-source.directive';
 })
 
 export class FilterSectionComponent<T> implements OnInit {
+  public faPlusSquare = faPlusSquare;
   recordCount$!: Observable<number>;
 
   constructor() {
@@ -17,7 +19,8 @@ export class FilterSectionComponent<T> implements OnInit {
 
   @Input() dataSource!: DataSource<T>
   @Input() subjectNamePlural!: string;
-  @Output() filterTermChangeEvent = new EventEmitter<string>();
+  @Input() subjectNameSingular!: string;
+  @Input() newItemRoute!: string;
   @ViewChild(FilterSourceDirective) filterSource!: FilterSourceDirective;
 
   ngOnInit(): void {
