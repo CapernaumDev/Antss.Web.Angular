@@ -11,13 +11,13 @@
   </filter-section>
   <div class="board">
     <div class="board-wrapper">
-      <div cdkDropList cdkDropListOrientation="horizontal" class="board-columns">
+      <div cdkDropList cdkDropListOrientation="horizontal" class="board-columns" cdkDropListGroup>
         <div cdkDragLockAxis="x" class="board-column"
           *ngFor="let column of board$ | async; index as i; trackBy: trackColumnBy" cdkDrag>
           <div class="column-title" cdkDragHandle>
             {{ column.title }}
           </div>
-          <div class="tasks-container" id="{{column.id}}" [cdkDropListConnectedTo]="['1', '2', '3']" cdkDropList
+          <div class="tasks-container" id="{{column.id}}" cdkDropList
             [cdkDropListData]="column" (cdkDropListDropped)="drop($event)"
             *ngIf="{filterTerm: (filterTerm$ | async) || ''} as filter">
             <div board-item *ngFor="let ticket of column.items as TicketListItem; index as i; trackBy: trackTicketBy"
