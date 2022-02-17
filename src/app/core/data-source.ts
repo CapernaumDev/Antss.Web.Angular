@@ -1,4 +1,4 @@
-import { first, isObservable, map, Observable, of, Subject, Subscription, tap, withLatestFrom } from "rxjs";
+import { isObservable, map, Observable, of, Subject, Subscription, tap, withLatestFrom } from "rxjs";
 import { FilterSourceDirective } from "./directives/filter-source.directive";
 import { SortableDirective } from "./directives/sortable.directive";
 import { SetFilterEvent } from "./interfaces/set-filter-event";
@@ -24,10 +24,6 @@ export abstract class DataSource<T> {
 
   protected onDataUpdated?(data: T[]): void;
 
-  constructor(data: T[] = []) {
-    this.setInitialData(data, true);
-  }
-
   set sorter(sorter: SortableDirective) {
     this.listenToSortChanges(sorter);
   }
@@ -45,13 +41,13 @@ export abstract class DataSource<T> {
       const sub = data
         .pipe(
           tap((res) => {
-            this.setInitialData(res, false);
+            this.setInitialData(res);
           })
         )
         .subscribe();
       this.subs.push(sub);
     } else {
-      this.setInitialData(data, false);
+      this.setInitialData(data);
     }
   }
 
@@ -126,7 +122,7 @@ export abstract class DataSource<T> {
     this.subs.push(sub);
   }
 
-  private setInitialData(data: T[], firstInitialisation: boolean | null) {
+  private setInitialData(data: T[]) {
     this.inititalDataSubject.next(data);
     
     if (this.lastFilterEvent && this.lastFilterEvent.filterTerm) {
@@ -140,7 +136,7 @@ export abstract class DataSource<T> {
     this.dataSubject.next(data);
     this.recordCount.next(data.length);
 
-    if (this.onDataUpdated && !firstInitialisation)
+    if (this.onDataUpdated)
       this.onDataUpdated(data);
   }
 }
