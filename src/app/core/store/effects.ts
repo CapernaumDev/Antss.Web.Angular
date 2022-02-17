@@ -145,6 +145,16 @@ export class Effects {
         ), { dispatch: false }
     );
 
+    formCancelled = createEffect(() => 
+        this.actions$.pipe(
+            ofType(UiActions.formCancelled),
+            withLatestFrom(this.store.select(selectPreviousUrl)),
+            tap(([action, previousUrl]) => {
+                this.router.navigateByUrl(previousUrl == null || previousUrl == '/' || previousUrl == '/login' ? action.defaultRedirect : previousUrl);
+            })
+        ), { dispatch: false }
+    );
+
     loadUserRequested$ = createEffect(() =>
         this.actions$.pipe(
             ofType(UiActions.loadUserRequested),

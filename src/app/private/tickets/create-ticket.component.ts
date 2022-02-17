@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 import { CurrentUser } from '@app/core/models/user/current-user';
 import { OptionItem } from '@app/core/models/option-item';
 import { selectAssignableUsers, selectCurrentUser } from '@app/core/store/selectors';
-import { createTicketRequested } from '@app/core/store/actions-ui';
+import { createTicketRequested, formCancelled } from '@app/core/store/actions-ui';
 
 @Component({
   selector: 'create-ticket',
@@ -39,7 +39,7 @@ export class CreateTicketComponent extends BaseFormComponent implements OnInit {
   cancelAndReturn() {
     if (this.form.dirty && !confirm("Are you sure you wish to cancel?")) return;
 
-    this.router.navigate(['ticket-list'])
+    this.store.dispatch(formCancelled({ defaultRedirect: 'ticket-list' }));
   }
 
   ngOnInit() {

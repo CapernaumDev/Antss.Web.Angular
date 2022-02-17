@@ -55,3 +55,8 @@ export const updateUserRequested = createAction(
     '[User Form] Update User Requested',
     props<{ user: User }>()
 );
+
+export const formCancelled = createAction(
+    '[Entity Form] Form Entry Cancelled',
+    props<{ defaultRedirect: string }>()
+)
