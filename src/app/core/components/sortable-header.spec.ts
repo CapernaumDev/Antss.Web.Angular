@@ -1,7 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { MockProvider } from 'ng-mocks';
+import { of } from 'rxjs';
 import { SortableDirective } from '../directives/sortable.directive';
+import { SortDirection } from '../interfaces/sort-change-event';
 
 import { SortableHeaderComponent } from './sortable-header.component';
 
@@ -12,13 +14,16 @@ describe('SortableHeaderComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [SortableHeaderComponent],
-      providers: [MockProvider(SortableDirective)]
+      providers: [
+        MockProvider(SortableDirective, { direction$: of('asc' as SortDirection), active$: of('componentRef') })
+      ]
     }).compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SortableHeaderComponent);
     component = fixture.componentInstance;
+    component.ref = 'componentRef';
     fixture.detectChanges();
   });
 
@@ -34,21 +39,23 @@ describe('SortableHeaderComponent', () => {
   });
 
   it('should show up arrow when sortable direction is ascending', () => {
-    component.sortable.direction = 'asc';
+    fixture.debugElement.query(By.css('div')).nativeElement.click();
     fixture.detectChanges();
     let div = fixture.debugElement.query(By.css('[data-test-id="showSortOrder"]')).nativeElement;
     expect(div.attributes['class'].value).toBe('arrow asc');
   });
 
   it('should show down arrow when sortable direction is descending', () => {
-    component.sortable.direction = 'desc';
+    component.sortable.direction$ = of('desc');
+    fixture.debugElement.query(By.css('div')).nativeElement.click();
     fixture.detectChanges();
     let div = fixture.debugElement.query(By.css('[data-test-id="showSortOrder"]')).nativeElement;
     expect(div.attributes['class'].value).toBe('arrow desc');
   });
 
   it('should hide arrow when sortable direction is null', () => {
-    component.sortable.direction = null;
+    component.sortable.direction$ = of(null);
+    fixture.debugElement.query(By.css('div')).nativeElement.click();
     fixture.detectChanges();
     let div = fixture.debugElement.query(By.css('[data-test-id="showSortOrder"]')).nativeElement;
     expect(div.attributes['class'].value).toBe('arrow hide');

@@ -19,7 +19,6 @@
           cdkDragLockAxis="x"
           class="board-column"
           *ngFor="let column of board$ | ngrxPush; index as i; trackBy: trackColumnBy"
-          cdkDrag
         >
           <div class="column-title" cdkDragHandle>
             {{ column.title }}

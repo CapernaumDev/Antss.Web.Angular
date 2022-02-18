@@ -1,8 +1,9 @@
-import { Component, Input, HostListener, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, HostListener, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { SortableDirective } from '@app/core/directives/sortable.directive';
 
 @Component({
   selector: '[sortHeader]',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="sort-col">
       <ng-content></ng-content>
@@ -10,9 +11,9 @@ import { SortableDirective } from '@app/core/directives/sortable.directive';
         data-test-id="showSortOrder"
         [ngClass]="{
           arrow: true,
-          hide: sortable?.active !== ref || sortable?.direction === null,
-          asc: sortable?.active === ref && sortable?.direction === 'asc',
-          desc: sortable?.active === ref && sortable?.direction === 'desc'
+          hide: (sortable.active$ | ngrxPush) !== ref || (sortable.direction$ | ngrxPush) === null,
+          asc: (sortable.active$ | ngrxPush) === ref && (sortable.direction$ | ngrxPush) === 'asc',
+          desc: (sortable.active$ | ngrxPush) === ref && (sortable.direction$ | ngrxPush) === 'desc'
         }"
       >
         🡡

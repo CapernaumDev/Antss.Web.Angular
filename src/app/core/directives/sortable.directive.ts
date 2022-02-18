@@ -1,28 +1,39 @@
 import { Directive, EventEmitter, Output } from '@angular/core';
+import { BehaviorSubject, shareReplay, tap } from 'rxjs';
 import { SortChangeEvent, SortDirection } from '../interfaces/sort-change-event';
 
 @Directive({
   selector: '[sortable]'
 })
 export class SortableDirective {
-  active!: string;
-  direction!: SortDirection | null;
+  private active = new BehaviorSubject<string>('');
+  private direction = new BehaviorSubject<SortDirection | null>(null);
+  private lastActive?: string | null;
+  private lastDirection?: SortDirection | null;
+  active$ = this.active.pipe(
+    shareReplay(1),
+    tap((x) => (this.lastActive = x))
+  );
+  direction$ = this.direction.pipe(tap((x) => (this.lastDirection = x)));
 
   @Output() sortChange = new EventEmitter<SortChangeEvent>();
 
   sort(column: string) {
-    let direction = this.direction;
+    let direction = this.lastDirection as SortDirection;
 
-    if (this.active !== column) {
-      this.direction = null;
-      this.active = column;
+    //TODO: Sort out this last.. stuff
+
+    if (this.lastActive !== column) {
+      this.lastDirection = null;
+      this.direction.next(null);
+      this.active.next(column);
     }
 
-    if (this.direction === null) {
+    if (this.lastDirection === null) {
       direction = 'asc';
-    } else if (this.direction === 'asc') {
+    } else if (this.lastDirection === 'asc') {
       direction = 'desc';
-    } else if (this.direction === 'desc') {
+    } else if (this.lastDirection === 'desc') {
       direction = null;
     }
 
@@ -30,6 +41,9 @@ export class SortableDirective {
       column,
       direction
     });
-    this.direction = direction;
+
+    this.lastDirection = direction;
+    this.lastActive = column;
+    this.direction.next(direction);
   }
 }
