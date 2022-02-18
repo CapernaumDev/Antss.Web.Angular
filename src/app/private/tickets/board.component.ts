@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, ViewChild } from '@angular/core';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Store } from '@ngrx/store';
 
@@ -17,7 +17,7 @@ import { selectTicketBoard } from '@app/core/store/selectors';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [TicketBoardDataSource]
 })
-export class TicketBoardComponent {
+export class TicketBoardComponent implements OnDestroy {
   board$: Observable<BoardColumn<TicketListItem>[]> = this.boardDataSource.data$;
   filterTerm$: Observable<string> = this.boardDataSource.filterTerm$;
 

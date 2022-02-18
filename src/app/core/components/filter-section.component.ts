@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DataSource } from '../data-source';
 import { FilterSourceDirective } from '../directives/filter-source.directive';
@@ -9,7 +9,7 @@ import { faPlusSquare } from '@fortawesome/free-solid-svg-icons/faPlusSquare';
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './filter-section.component.html'
 })
-export class FilterSectionComponent<T> implements OnInit {
+export class FilterSectionComponent<T> implements OnInit, AfterViewInit {
   public faPlusSquare = faPlusSquare;
   recordCount$!: Observable<number>;
 

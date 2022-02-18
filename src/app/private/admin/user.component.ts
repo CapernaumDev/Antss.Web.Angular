@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
@@ -19,7 +19,7 @@ import { createUserRequested, loadUserRequested, updateUserRequested } from '@ap
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './user.component.html'
 })
-export class UserComponent extends BaseFormComponent implements OnInit {
+export class UserComponent extends BaseFormComponent implements OnInit, OnDestroy {
   FormModes = FormModes;
   public offices$!: Observable<OptionItem[]>;
   public userTypes$!: Observable<OptionItem[]>;

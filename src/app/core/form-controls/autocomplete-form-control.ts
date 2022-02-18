@@ -12,14 +12,14 @@ import { OptionItem } from '../models/option-item';
     {
       provide: NG_VALUE_ACCESSOR,
       multi: true,
-      useExisting: AutocompleteFormControl
+      useExisting: AutocompleteFormControlComponent
     }
   ]
 })
 
 // Makes ngbTypeahead available as a formcontrol with OptionItem[] as available options
 // TODO: full implementation of formcontrol validation etc
-export class AutocompleteFormControl implements ControlValueAccessor, OnInit {
+export class AutocompleteFormControlComponent implements ControlValueAccessor, OnInit {
   @ViewChild('inputElement') inputElement!: HTMLElement;
   @ViewChild('instance', { static: true }) instance!: NgbTypeahead;
   focus$ = new Subject<string>();

@@ -2,20 +2,20 @@ import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testin
 import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 import { MockDirective } from 'ng-mocks';
 import { of } from 'rxjs';
-import { AutocompleteFormControl } from './autocomplete-form-control';
+import { AutocompleteFormControlComponent } from './autocomplete-form-control';
 
 describe('AutocompleteFormControl', () => {
-  let component: AutocompleteFormControl;
-  let fixture: ComponentFixture<AutocompleteFormControl>;
+  let component: AutocompleteFormControlComponent;
+  let fixture: ComponentFixture<AutocompleteFormControlComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AutocompleteFormControl, MockDirective(NgbTypeahead)]
+      declarations: [AutocompleteFormControlComponent, MockDirective(NgbTypeahead)]
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AutocompleteFormControl);
+    fixture = TestBed.createComponent(AutocompleteFormControlComponent);
     component = fixture.componentInstance;
     component.optionItems = of([
       { value: 1, label: 'a' },

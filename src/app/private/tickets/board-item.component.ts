@@ -12,17 +12,13 @@ import confirmationHighlightAnimation from '@app/core/animations/confirmation-hi
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: confirmationHighlightAnimation
 })
-export class TicketBoardItemComponent implements OnInit {
+export class TicketBoardItemComponent {
   constructor(private store: Store) {}
 
   @Input() ticket!: TicketListItem;
   @Input() filterTerm!: string;
 
-  ngOnInit(): void {}
-
   animationComplete(animation: string | null) {
     if (animation) this.store.dispatch(ticketAnimationPlayed({ ticketId: this.ticket.id }));
   }
-
-  ngOnDestroy() {}
 }

@@ -5,10 +5,8 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './my-profile.component.html'
 })
-export class MyProfileComponent implements OnInit {
+export class MyProfileComponent {
   constructor() {}
-
-  ngOnInit(): void {}
 
   onSubmit() {}
 }

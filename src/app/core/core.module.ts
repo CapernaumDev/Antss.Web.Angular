@@ -8,7 +8,7 @@ import { faEnvelope, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { BaseFormComponent } from './components/base-form-component';
 import { PreventDoubleSubmitDirective } from './directives/prevent-double-submit.directive';
 import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
-import { AutocompleteFormControl } from './form-controls/autocomplete-form-control';
+import { AutocompleteFormControlComponent } from './form-controls/autocomplete-form-control';
 import { SortableDirective } from './directives/sortable.directive';
 import { SortableHeaderComponent } from './components/sortable-header.component';
 import { FilterInputComponent } from './components/filter-input.component';
@@ -21,7 +21,7 @@ import { FilterSectionComponent } from './components/filter-section.component';
     BaseFormComponent,
     SortableHeaderComponent,
     FilterInputComponent,
-    AutocompleteFormControl,
+    AutocompleteFormControlComponent,
     PreventDoubleSubmitDirective,
     SortableDirective,
     FilterSourceDirective,
@@ -33,7 +33,7 @@ import { FilterSectionComponent } from './components/filter-section.component';
     BaseFormComponent,
     SortableHeaderComponent,
     FilterInputComponent,
-    AutocompleteFormControl,
+    AutocompleteFormControlComponent,
     PreventDoubleSubmitDirective,
     SortableDirective,
     FilterSourceDirective,

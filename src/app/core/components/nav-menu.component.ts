@@ -14,7 +14,7 @@ import { selectCurrentUser } from '../store/selectors';
   templateUrl: './nav-menu.component.html',
   styleUrls: ['./nav-menu.component.css']
 })
-export class NavMenuComponent implements OnInit {
+export class NavMenuComponent {
   public currentUser$: Observable<CurrentUser | null>;
   public faUserCircle = faUserCircle;
   public faEnvelope = faEnvelope;
@@ -24,8 +24,6 @@ export class NavMenuComponent implements OnInit {
   constructor(private store: Store<AppState>) {
     this.currentUser$ = this.store.select(selectCurrentUser);
   }
-
-  ngOnInit(): void {}
 
   collapse() {
     this.isExpanded = false;

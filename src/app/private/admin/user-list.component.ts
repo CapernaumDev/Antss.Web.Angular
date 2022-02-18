@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserListItem } from '@app/core/models/user/user-list-item';
 import { UserListDataSource } from './user-list-data-source';
@@ -14,7 +14,7 @@ import { selectUserList } from '@app/core/store/selectors';
   templateUrl: './user-list.component.html',
   providers: [UserListDataSource]
 })
-export class UserListComponent {
+export class UserListComponent implements OnDestroy, AfterViewInit {
   users$: Observable<UserListItem[]> = this.usersDataSource.data$;
   filterTerm$: Observable<string> = this.usersDataSource.filterTerm$;
 

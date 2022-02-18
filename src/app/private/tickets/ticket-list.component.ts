@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TicketListItem } from '@core/models/ticket/ticket-list-item';
 import { SortableDirective } from '@app/core/directives/sortable.directive';
@@ -17,7 +17,7 @@ import confirmationHighlightAnimation from '@app/core/animations/confirmation-hi
   animations: confirmationHighlightAnimation,
   providers: [TicketListDataSource]
 })
-export class TicketListComponent {
+export class TicketListComponent implements AfterViewInit, OnDestroy {
   tickets$: Observable<TicketListItem[]> = this.ticketsDataSource.data$;
   filterTerm$: Observable<string> = this.ticketsDataSource.filterTerm$;
 

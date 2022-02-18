@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Editor } from 'ngx-editor';
@@ -17,7 +17,7 @@ import { createTicketRequested, formCancelled } from '@app/core/store/actions-ui
   templateUrl: './create-ticket.component.html',
   styleUrls: ['./create-ticket.component.css']
 })
-export class CreateTicketComponent extends BaseFormComponent implements OnInit {
+export class CreateTicketComponent extends BaseFormComponent implements OnInit, OnDestroy {
   editor!: Editor;
   currentUser$: Observable<CurrentUser | null>;
   assignableUsers$: Observable<OptionItem[]>;

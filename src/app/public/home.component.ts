@@ -13,7 +13,7 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './home.component.html',
   animations: [trigger('fade', [transition('void => *', [style({ opacity: 0 }), animate(500, style({ opacity: 1 }))])])]
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   public isSigningIn$: Observable<boolean>;
   public currentUser$: Observable<CurrentUser | null>;
 
@@ -21,6 +21,4 @@ export class HomeComponent implements OnInit {
     this.isSigningIn$ = this.store.select(selectIsSigningIn);
     this.currentUser$ = this.store.select(selectCurrentUser);
   }
-
-  ngOnInit() {}
 }
