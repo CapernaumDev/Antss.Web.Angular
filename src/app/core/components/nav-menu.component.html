@@ -18,7 +18,7 @@
           <li class="nav-item" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{ exact: true }">
             <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
           </li>
-          <ng-container *ngIf="currentUser$ | async as user; else showLogin">
+          <ng-container *ngIf="currentUser$ | ngrxPush as user; else showLogin">
             <li class="nav-item" *ngIf="user.isAdmin" [routerLinkActive]="['link-active']">
               <a class="nav-link text-dark" [routerLink]="['user-list']">Admin</a>
             </li>

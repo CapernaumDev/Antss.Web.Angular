@@ -10,7 +10,6 @@ import { debounceTime, distinctUntilChanged, Subject, Subscription } from 'rxjs'
   `
 })
 export class FilterInputComponent implements OnInit, OnDestroy {
-  public currentValue = '';
   private filterTerm$ = new Subject<string>();
   private subscription!: Subscription;
 
@@ -26,7 +25,6 @@ export class FilterInputComponent implements OnInit, OnDestroy {
       .pipe(debounceTime(300), distinctUntilChanged())
       .subscribe((filterValue: string) => {
         this.filter.filter(filterValue);
-        this.currentValue = filterValue;
       });
   }
 

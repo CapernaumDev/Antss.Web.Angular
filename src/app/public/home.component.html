@@ -1,8 +1,8 @@
 <div @fade>
-  <h1 *ngIf="isSigningIn$ | async; else checkIfUser">Signing in...</h1>
+  <h1 *ngIf="isSigningIn$ | ngrxPush; else checkIfUser">Signing in...</h1>
 
   <ng-template #checkIfUser>
-    <ng-container *ngIf="currentUser$ | async as user; else noUser">
+    <ng-container *ngIf="currentUser$ | ngrxPush as user; else noUser">
       <h1>Welcome, {{ user.firstName }}</h1>
     </ng-container>
   </ng-template>

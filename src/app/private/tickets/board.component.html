@@ -18,7 +18,7 @@
         <div
           cdkDragLockAxis="x"
           class="board-column"
-          *ngFor="let column of board$ | async; index as i; trackBy: trackColumnBy"
+          *ngFor="let column of board$ | ngrxPush; index as i; trackBy: trackColumnBy"
           cdkDrag
         >
           <div class="column-title" cdkDragHandle>
@@ -30,7 +30,7 @@
             cdkDropList
             [cdkDropListData]="column"
             (cdkDropListDropped)="drop($event)"
-            *ngIf="{ filterTerm: (filterTerm$ | async) || '' } as filter"
+            *ngIf="{ filterTerm: (filterTerm$ | ngrxPush) || '' } as filter"
           >
             <div
               board-item

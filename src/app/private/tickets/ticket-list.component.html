@@ -23,9 +23,8 @@
         <th>Title</th>
       </tr>
     </thead>
-    <tbody *ngIf="{ filterTerm: (filterTerm$ | async) || '' } as filter">
-      <!--TODO: ngrxPush Pipe / ngrxLet  -->
-      <tr *ngFor="let x of tickets$ | async; index as i; trackBy: trackTicketBy">
+    <tbody *ngIf="{ filterTerm: (filterTerm$ | ngrxPush) || '' } as filter">
+      <tr *ngFor="let x of tickets$ | ngrxPush; index as i; trackBy: trackTicketBy">
         <!-- NB! animations on tds because animation on *ngFor element or preceeding ng-container causes change
           detection problem when component is reloaded from previously stored route (table displays rows no longer 
           present in data source). There is no scope in table to add an extra child element to wrap. Maybe make this a grid instead -->

@@ -16,9 +16,8 @@
         <th>Edit</th>
       </tr>
     </thead>
-    <tbody *ngIf="{ filterTerm: (filterTerm$ | async) || '' } as filter">
-      <!--TODO: ngrxPush Pipe / ngrxLet  -->
-      <tr *ngFor="let x of users$ | async; index as i; trackBy: trackUserBy">
+    <tbody *ngIf="{ filterTerm: (filterTerm$ | ngrxPush) || '' } as filter">
+      <tr *ngFor="let x of users$ | ngrxPush; index as i; trackBy: trackUserBy">
         <td><ngb-highlight [result]="x.firstName" [term]="filter.filterTerm"></ngb-highlight></td>
         <td><ngb-highlight [result]="x.lastName" [term]="filter.filterTerm"></ngb-highlight></td>
         <td><ngb-highlight [result]="x.userType" [term]="filter.filterTerm"></ngb-highlight></td>

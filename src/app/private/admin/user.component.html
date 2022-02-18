@@ -92,7 +92,7 @@
         class="form-select"
         id="inputOffice"
       >
-        <option *ngFor="let x of offices$ | async" value="{{ x.value }}">
+        <option *ngFor="let x of offices$ | ngrxPush" value="{{ x.value }}">
           {{ x.label }}
         </option>
       </select>
@@ -106,7 +106,7 @@
     <div class="col-12">
       <label class="form-label">User Type</label>
       <br />
-      <div *ngFor="let x of userTypes$ | async" class="form-check form-check-inline">
+      <div *ngFor="let x of userTypes$ | ngrxPush" class="form-check form-check-inline">
         <input
           id="userTypeInput{{ x.value }}"
           type="radio"

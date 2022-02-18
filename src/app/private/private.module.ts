@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveComponentModule } from '@ngrx/component';
 import { NgxEditorModule } from 'ngx-editor';
 import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -35,6 +36,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     NgxEditorModule,
     NgbTypeaheadModule,
     DragDropModule,
+    ReactiveComponentModule,
     RouterModule.forRoot([
       {
         path: 'user-list',

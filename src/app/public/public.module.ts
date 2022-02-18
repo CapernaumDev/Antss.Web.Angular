@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveComponentModule } from '@ngrx/component';
 
 import { LoginComponent } from './login.component';
 import { HomeComponent } from './home.component';
@@ -16,6 +17,7 @@ import { CoreModule } from '@app/core/core.module';
     CoreModule,
     FormsModule,
     ReactiveFormsModule,
+    ReactiveComponentModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },

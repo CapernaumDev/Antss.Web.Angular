@@ -41,7 +41,7 @@
       </div>
     </div>
 
-    <ng-container *ngIf="currentUser$ | async as user">
+    <ng-container *ngIf="currentUser$ | ngrxPush as user">
       <div class="col-md-6" *ngIf="user.isSupport">
         <label for="inputAssignedTo">Assign To</label>
         <autocomplete-form-control

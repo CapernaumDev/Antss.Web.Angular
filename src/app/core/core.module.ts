@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavMenuComponent } from '@app/core/components/nav-menu.component';
 import { RouterModule } from '@angular/router';
+import { ReactiveComponentModule } from '@ngrx/component';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faEnvelope, faUserCircle } from '@fortawesome/free-solid-svg-icons';
@@ -27,7 +28,7 @@ import { FilterSectionComponent } from './components/filter-section.component';
     FilterSourceDirective,
     FilterSectionComponent
   ],
-  imports: [CommonModule, RouterModule, FormsModule, FontAwesomeModule, NgbTypeaheadModule],
+  imports: [CommonModule, RouterModule, FormsModule, FontAwesomeModule, NgbTypeaheadModule, ReactiveComponentModule],
   exports: [
     NavMenuComponent,
     BaseFormComponent,
