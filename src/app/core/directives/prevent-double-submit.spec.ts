@@ -4,8 +4,7 @@ import { By } from '@angular/platform-browser';
 import { PreventDoubleSubmitDirective } from './prevent-double-submit.directive';
 
 @Component({
-  template: `
-  <form preventDoubleSubmit (throttledOnSubmit)="onSubmit()">
+  template: ` <form preventDoubleSubmit (throttledOnSubmit)="onSubmit()">
     <button type="submit"></button>
   </form>`
 })
@@ -20,11 +19,8 @@ describe('FilterSourceDirective', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ 
-        TestComponent, PreventDoubleSubmitDirective
-      ]
-    })
-    .compileComponents();
+      declarations: [TestComponent, PreventDoubleSubmitDirective]
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -37,9 +33,7 @@ describe('FilterSourceDirective', () => {
 
   it('should allow form submission when first clicked', () => {
     spyOn(component, 'onSubmit');
-    const submitButton = fixture.debugElement.query(
-      By.css('button')
-    );
+    const submitButton = fixture.debugElement.query(By.css('button'));
 
     submitButton.nativeElement.click();
     fixture.detectChanges();
@@ -49,9 +43,7 @@ describe('FilterSourceDirective', () => {
 
   it('should not allow subsequent submissions for the duration of the timer', () => {
     spyOn(component, 'onSubmit');
-    const submitButton = fixture.debugElement.query(
-      By.css('button')
-    );
+    const submitButton = fixture.debugElement.query(By.css('button'));
 
     submitButton.nativeElement.click();
     fixture.detectChanges();
@@ -67,9 +59,7 @@ describe('FilterSourceDirective', () => {
 
   it('should allow subsequent submissions after the duration of the timer', fakeAsync(() => {
     spyOn(component, 'onSubmit');
-    const submitButton = fixture.debugElement.query(
-      By.css('button')
-    );
+    const submitButton = fixture.debugElement.query(By.css('button'));
 
     submitButton.nativeElement.click();
     fixture.detectChanges();
@@ -80,5 +70,4 @@ describe('FilterSourceDirective', () => {
 
     expect(component.onSubmit).toHaveBeenCalledTimes(2);
   }));
-
 });

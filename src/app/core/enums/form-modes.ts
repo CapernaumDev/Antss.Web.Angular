@@ -1,4 +1,4 @@
 export enum FormModes {
-    Create,
-    Edit
+  Create,
+  Edit
 }

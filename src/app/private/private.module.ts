@@ -36,17 +36,20 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     NgbTypeaheadModule,
     DragDropModule,
     RouterModule.forRoot([
-      { path: 'user-list', component: UserListComponent, canActivate: [AuthGuard], data: { role: ['Admin'], reuse: true }  },
-      { path: 'user', component: UserComponent, canActivate: [AuthGuard], data: { role: ['Admin'] }  },
-      { path: 'user/:id', component: UserComponent, canActivate: [AuthGuard], data: { role: ['Admin'] }  },
+      {
+        path: 'user-list',
+        component: UserListComponent,
+        canActivate: [AuthGuard],
+        data: { role: ['Admin'], reuse: true }
+      },
+      { path: 'user', component: UserComponent, canActivate: [AuthGuard], data: { role: ['Admin'] } },
+      { path: 'user/:id', component: UserComponent, canActivate: [AuthGuard], data: { role: ['Admin'] } },
       { path: 'ticket-list', component: TicketListComponent, canActivate: [AuthGuard], data: { reuse: true } },
       { path: 'ticket-board', component: TicketBoardComponent, canActivate: [AuthGuard], data: { reuse: true } },
-      { path: 'create-ticket', component: CreateTicketComponent, canActivate: [AuthGuard], },
+      { path: 'create-ticket', component: CreateTicketComponent, canActivate: [AuthGuard] },
       { path: 'my-profile', component: MyProfileComponent, canActivate: [AuthGuard], data: { reuse: true } }
     ])
   ],
-  exports: [
-  ]
+  exports: []
 })
-export class PrivateModule { }
-
+export class PrivateModule {}

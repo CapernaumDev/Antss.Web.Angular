@@ -17,8 +17,7 @@ class TestDataSourceImpl extends DataSource<TestDataSourceSubject> {
     return [];
   }
   filterChange() {}
-  set filterSource(filterSource: FilterSourceDirective) {
-  }
+  set filterSource(filterSource: FilterSourceDirective) {}
   recordCount$: Observable<number> = of(0);
 }
 const testDataSource = new TestDataSourceImpl();
@@ -29,10 +28,9 @@ describe('FilterSectionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      providers: [provideMockStore({  })], 
-      declarations: [ FilterSectionComponent ]
-    })
-    .compileComponents();
+      providers: [provideMockStore({})],
+      declarations: [FilterSectionComponent]
+    }).compileComponents();
   });
 
   it('should create', () => {
@@ -42,5 +40,4 @@ describe('FilterSectionComponent', () => {
     fixture.detectChanges();
     expect(component).toBeTruthy();
   });
-
 });

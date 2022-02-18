@@ -4,9 +4,9 @@ import { By } from '@angular/platform-browser';
 import { SortableDirective } from './sortable.directive';
 
 @Component({
-  template: `<th sortable></th >`
+  template: `<th sortable></th>`
 })
-class TestComponent { }
+class TestComponent {}
 
 describe('SortableDirective', () => {
   let directiveInstance: SortableDirective;
@@ -15,11 +15,8 @@ describe('SortableDirective', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ 
-        TestComponent, SortableDirective
-      ]
-    })
-    .compileComponents();
+      declarations: [TestComponent, SortableDirective]
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -35,8 +32,7 @@ describe('SortableDirective', () => {
     directiveInstance.sort('abc');
     fixture.detectChanges();
 
-    expect(directiveInstance.sortChange.emit)
-      .toHaveBeenCalledOnceWith(jasmine.objectContaining({ column: 'abc' }));
+    expect(directiveInstance.sortChange.emit).toHaveBeenCalledOnceWith(jasmine.objectContaining({ column: 'abc' }));
   });
 
   it('should emit sort event with ascending direction when called first time', () => {
@@ -44,10 +40,9 @@ describe('SortableDirective', () => {
     directiveInstance.sort('abc');
     fixture.detectChanges();
 
-    expect(directiveInstance.sortChange.emit)
-      .toHaveBeenCalledOnceWith(jasmine.objectContaining({ direction: 'asc' }));
+    expect(directiveInstance.sortChange.emit).toHaveBeenCalledOnceWith(jasmine.objectContaining({ direction: 'asc' }));
   });
-  
+
   it('should emit sort event with descending direction when called second time', () => {
     directiveInstance.sort('abc');
     fixture.detectChanges();
@@ -55,8 +50,7 @@ describe('SortableDirective', () => {
     directiveInstance.sort('abc');
     fixture.detectChanges();
 
-    expect(directiveInstance.sortChange.emit)
-      .toHaveBeenCalledWith(jasmine.objectContaining({ direction: 'desc' }));
+    expect(directiveInstance.sortChange.emit).toHaveBeenCalledWith(jasmine.objectContaining({ direction: 'desc' }));
   });
 
   it('should emit sort event with null direction when called third time', () => {
@@ -68,8 +62,7 @@ describe('SortableDirective', () => {
     directiveInstance.sort('abc');
     fixture.detectChanges();
 
-    expect(directiveInstance.sortChange.emit)
-      .toHaveBeenCalledWith(jasmine.objectContaining({ direction: null }));
+    expect(directiveInstance.sortChange.emit).toHaveBeenCalledWith(jasmine.objectContaining({ direction: null }));
   });
 
   it('should emit sort event with ascending direction when called fourth time', () => {
@@ -83,8 +76,6 @@ describe('SortableDirective', () => {
     directiveInstance.sort('abc');
     fixture.detectChanges();
 
-    expect(directiveInstance.sortChange.emit)
-      .toHaveBeenCalledOnceWith(jasmine.objectContaining({ direction: 'asc' }));
+    expect(directiveInstance.sortChange.emit).toHaveBeenCalledOnceWith(jasmine.objectContaining({ direction: 'asc' }));
   });
-
 });

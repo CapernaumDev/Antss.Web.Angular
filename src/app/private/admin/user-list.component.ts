@@ -14,16 +14,15 @@ import { selectUserList } from '@app/core/store/selectors';
   templateUrl: './user-list.component.html',
   providers: [UserListDataSource]
 })
-
 export class UserListComponent {
   users$: Observable<UserListItem[]> = this.usersDataSource.data$;
   filterTerm$: Observable<string> = this.usersDataSource.filterTerm$;
 
   @ViewChild(SortableDirective) sorter!: SortableDirective;
 
-  constructor(private store: Store<AppState>, public usersDataSource: UserListDataSource) { 
-    this.store.dispatch(loadUserListRequested()); 
-    this.usersDataSource.setDataSource(this.store.select(selectUserList)); 
+  constructor(private store: Store<AppState>, public usersDataSource: UserListDataSource) {
+    this.store.dispatch(loadUserListRequested());
+    this.usersDataSource.setDataSource(this.store.select(selectUserList));
   }
 
   ngAfterViewInit() {

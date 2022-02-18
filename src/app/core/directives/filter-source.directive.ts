@@ -1,19 +1,19 @@
-import { Directive, EventEmitter, Output } from "@angular/core";
-import { SetFilterEvent } from "../interfaces/set-filter-event";
+import { Directive, EventEmitter, Output } from '@angular/core';
+import { SetFilterEvent } from '../interfaces/set-filter-event';
 
 @Directive({
-    selector: "[filterSource]"
-  })
-  export class FilterSourceDirective {
-    active!: string;
-  
-    @Output() filterChange = new EventEmitter<SetFilterEvent>();
-  
-    filter(filterTerm: string | null) {
-      if (!filterTerm) filterTerm = '';
+  selector: '[filterSource]'
+})
+export class FilterSourceDirective {
+  active!: string;
 
-      this.filterChange.emit({
-        filterTerm
-      });
-    }
+  @Output() filterChange = new EventEmitter<SetFilterEvent>();
+
+  filter(filterTerm: string | null) {
+    if (!filterTerm) filterTerm = '';
+
+    this.filterChange.emit({
+      filterTerm
+    });
   }
+}

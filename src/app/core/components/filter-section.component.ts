@@ -7,7 +7,7 @@ import { faPlusSquare } from '@fortawesome/free-solid-svg-icons/faPlusSquare';
 @Component({
   selector: 'filter-section',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './filter-section.component.html',
+  templateUrl: './filter-section.component.html'
 })
 export class FilterSectionComponent<T> implements OnInit {
   public faPlusSquare = faPlusSquare;

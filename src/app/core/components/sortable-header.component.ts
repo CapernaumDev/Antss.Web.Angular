@@ -1,20 +1,26 @@
-import { Component, Input, HostListener, ChangeDetectionStrategy } from "@angular/core";
-import { SortableDirective } from "@app/core/directives/sortable.directive";
+import { Component, Input, HostListener, ChangeDetectionStrategy } from '@angular/core';
+import { SortableDirective } from '@app/core/directives/sortable.directive';
 
 @Component({
-  selector: "[sortHeader]",
+  selector: '[sortHeader]',
   template: `
     <div class="sort-col">
       <ng-content></ng-content>
-      <div data-test-id="showSortOrder" [ngClass]="{
+      <div
+        data-test-id="showSortOrder"
+        [ngClass]="{
           arrow: true,
           hide: sortable?.active !== ref || sortable?.direction === null,
           asc: sortable?.active === ref && sortable?.direction === 'asc',
           desc: sortable?.active === ref && sortable?.direction === 'desc'
-        }">🡡</div>
+        }"
+      >
+        🡡
+      </div>
     </div>
   `,
-  styles: [`
+  styles: [
+    `
       .sort-col {
         display: flex;
         justify-content: space-between;
@@ -29,13 +35,13 @@ import { SortableDirective } from "@app/core/directives/sortable.directive";
       .arrow.desc {
         transform: rotate(180deg);
       }
-  `],
+    `
+  ]
 })
-
 export class SortableHeaderComponent {
   @Input() ref!: string;
 
-  @HostListener("click")
+  @HostListener('click')
   sort() {
     this.sortable.sort(this.ref);
   }

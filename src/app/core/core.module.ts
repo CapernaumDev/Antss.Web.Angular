@@ -15,7 +15,6 @@ import { FilterInputComponent } from './components/filter-input.component';
 import { FilterSourceDirective } from './directives/filter-source.directive';
 import { FilterSectionComponent } from './components/filter-section.component';
 
-
 @NgModule({
   declarations: [
     NavMenuComponent,
@@ -28,13 +27,7 @@ import { FilterSectionComponent } from './components/filter-section.component';
     FilterSourceDirective,
     FilterSectionComponent
   ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    FormsModule,
-    FontAwesomeModule,
-    NgbTypeaheadModule
-  ],
+  imports: [CommonModule, RouterModule, FormsModule, FontAwesomeModule, NgbTypeaheadModule],
   exports: [
     NavMenuComponent,
     BaseFormComponent,
@@ -47,8 +40,7 @@ import { FilterSectionComponent } from './components/filter-section.component';
     FilterSectionComponent
   ]
 })
-
-export class CoreModule { 
+export class CoreModule {
   constructor(library: FaIconLibrary) {
     library.addIcons(faUserCircle, faEnvelope);
   }

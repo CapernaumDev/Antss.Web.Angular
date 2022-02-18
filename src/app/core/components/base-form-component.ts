@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
-  template: '',
+  template: ''
 })
 export class BaseFormComponent {
   saving = false;

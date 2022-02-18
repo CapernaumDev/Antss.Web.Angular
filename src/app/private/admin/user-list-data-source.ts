@@ -1,8 +1,8 @@
-import { SetFilterEvent } from "../../core/interfaces/set-filter-event";
-import { SortChangeEvent } from "../../core/interfaces/sort-change-event";
-import { UserListItem } from "../../core/models/user/user-list-item";
-import { DataSource } from "../../core/data-source";
-import { Injectable } from "@angular/core";
+import { SetFilterEvent } from '../../core/interfaces/set-filter-event';
+import { SortChangeEvent } from '../../core/interfaces/sort-change-event';
+import { UserListItem } from '../../core/models/user/user-list-item';
+import { DataSource } from '../../core/data-source';
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class UserListDataSource extends DataSource<UserListItem> {
@@ -20,11 +20,13 @@ export class UserListDataSource extends DataSource<UserListItem> {
   filterLogic({ filterTerm }: SetFilterEvent, data: UserListItem[]) {
     const term = filterTerm.toLowerCase();
 
-    return data.filter(x => {
-      return x.firstName.toLowerCase().includes(term)
-        || x.lastName.toLowerCase().includes(term)
-        || x.officeName.toLowerCase().includes(term)
-        || x.userType.toLowerCase().includes(term)
+    return data.filter((x) => {
+      return (
+        x.firstName.toLowerCase().includes(term) ||
+        x.lastName.toLowerCase().includes(term) ||
+        x.officeName.toLowerCase().includes(term) ||
+        x.userType.toLowerCase().includes(term)
+      );
     });
   }
 }

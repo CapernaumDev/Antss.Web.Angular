@@ -12,7 +12,7 @@ describe('FilterInputComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [FilterInputComponent],
-      providers: [MockProvider(FilterSourceDirective)],
+      providers: [MockProvider(FilterSourceDirective)]
     }).compileComponents();
   });
 

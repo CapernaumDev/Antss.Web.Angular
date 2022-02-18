@@ -5,7 +5,7 @@ import * as PushActions from './actions-push';
 import * as SystemActions from './actions-system';
 import * as UiActions from './actions-ui';
 import { initialState } from './app.state';
-import produce from "immer";
+import produce from 'immer';
 
 export const Reducers = createReducer(
   initialState,
@@ -18,7 +18,7 @@ export const Reducers = createReducer(
     ...state,
     currentUser: Object.assign(new CurrentUser(), {
       ...loginResult.user,
-      accessToken: window.btoa(loginResult.accessToken || localStorage["access-token"])
+      accessToken: window.btoa(loginResult.accessToken || localStorage['access-token'])
     }),
     status: 'success'
   })),
@@ -57,63 +57,75 @@ export const Reducers = createReducer(
     ticketListItems: tickets
   })),
 
-  on(PushActions.ticketCreated, (state, { ticket, boardColumnIndex, initiatedByUserId }) => 
-    produce(state, draft => {
-      if (!draft.ticketListItems.find(x => x.id === ticket.id))
-        draft.ticketListItems.push(ticket);
+  on(PushActions.ticketCreated, (state, { ticket, boardColumnIndex, initiatedByUserId }) =>
+    produce(state, (draft) => {
+      if (!draft.ticketListItems.find((x) => x.id === ticket.id)) draft.ticketListItems.push(ticket);
 
-      if (draft.ticketBoard.length && !draft.ticketBoard[0].items.find(x => x.id === ticket.id)) {
-        draft.ticketBoard[0].items.splice(0, 0, ticket)
+      if (draft.ticketBoard.length && !draft.ticketBoard[0].items.find((x) => x.id === ticket.id)) {
+        draft.ticketBoard[0].items.splice(0, 0, ticket);
       }
-  })),
+    })
+  ),
 
-  on(PushActions.ticketStatusUpdatedByServer, UiActions.ticketStatusUpdatedByUser,
-    (state, { ticket, boardColumnIndex }) => produce(state, draft => {
-      let ticketInTicketListStateCollection = draft.ticketListItems.find(x => x.id === ticket.id);
-      if (ticketInTicketListStateCollection)
-        ticketInTicketListStateCollection.ticketStatus = ticket.ticketStatus;
+  on(
+    PushActions.ticketStatusUpdatedByServer,
+    UiActions.ticketStatusUpdatedByUser,
+    (state, { ticket, boardColumnIndex }) =>
+      produce(state, (draft) => {
+        let ticketInTicketListStateCollection = draft.ticketListItems.find((x) => x.id === ticket.id);
+        if (ticketInTicketListStateCollection) ticketInTicketListStateCollection.ticketStatus = ticket.ticketStatus;
 
-      let destinationBoardColumn = draft.ticketBoard.find(x => x.title === ticket.ticketStatus);
-      if (destinationBoardColumn) {
-        for (let i = 0; i < draft.ticketBoard.length; i++) {
-          let foundTicketIndex = draft.ticketBoard[i].items.findIndex(x => x.id === ticket.id);
-          if (foundTicketIndex > -1) {
-            draft.ticketBoard[i].items.splice(foundTicketIndex, 1);
-            if (boardColumnIndex != null && boardColumnIndex > -1 && destinationBoardColumn.items.length >= boardColumnIndex)
-              destinationBoardColumn.items.splice(boardColumnIndex, 0, ticket);
-            else
-              destinationBoardColumn.items.push(ticket);
-            break;
+        let destinationBoardColumn = draft.ticketBoard.find((x) => x.title === ticket.ticketStatus);
+        if (destinationBoardColumn) {
+          for (let i = 0; i < draft.ticketBoard.length; i++) {
+            let foundTicketIndex = draft.ticketBoard[i].items.findIndex((x) => x.id === ticket.id);
+            if (foundTicketIndex > -1) {
+              draft.ticketBoard[i].items.splice(foundTicketIndex, 1);
+              if (
+                boardColumnIndex != null &&
+                boardColumnIndex > -1 &&
+                destinationBoardColumn.items.length >= boardColumnIndex
+              )
+                destinationBoardColumn.items.splice(boardColumnIndex, 0, ticket);
+              else destinationBoardColumn.items.push(ticket);
+              break;
+            }
           }
         }
-      }
-    })),
+      })
+  ),
 
-  on(SystemActions.ticketAnimationPlayed, (state, { ticketId }) => produce(state, draft => {
+  on(SystemActions.ticketAnimationPlayed, (state, { ticketId }) =>
+    produce(state, (draft) => {
       for (let i = 0; i < draft.ticketBoard.length; i++) {
-        let foundTicket = draft.ticketBoard[i].items.find(x => x.id === ticketId);
-        if (foundTicket)  {
+        let foundTicket = draft.ticketBoard[i].items.find((x) => x.id === ticketId);
+        if (foundTicket) {
           foundTicket.animation = null;
           break;
         }
       }
-  })),
+    })
+  ),
 
   on(ApiActions.loadTicketBoardSuccess, (state, { board }) => ({
     ...state,
     ticketBoard: board
   })),
 
-  on(PushActions.userCreated, (state, { user }) => produce(state, draft => {
-    draft.userListItems.push(user);
-  })),
+  on(PushActions.userCreated, (state, { user }) =>
+    produce(state, (draft) => {
+      draft.userListItems.push(user);
+    })
+  ),
 
-  on(PushActions.userUpdated, (state, { user }) => produce(state, draft => {
-    let userIndex = draft.userListItems.findIndex(x => x.id === user.id);
-    if (userIndex > -1) {
-      draft.userListItems.splice(userIndex, 1, user);
-    }
-  })),
+  on(PushActions.userUpdated, (state, { user }) =>
+    produce(state, (draft) => {
+      let userIndex = draft.userListItems.findIndex((x) => x.id === user.id);
+      if (userIndex > -1) {
+        draft.userListItems.splice(userIndex, 1, user);
+      }
+    })
+  ),
 
   on(ApiActions.loadUserListSuccess, (state, { users }) => ({
     ...state,

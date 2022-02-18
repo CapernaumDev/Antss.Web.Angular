@@ -7,7 +7,7 @@ import { debounceTime, distinctUntilChanged, Subject, Subscription } from 'rxjs'
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <input class="form-control form-control-sm" style="width: 200px; display: inline" (input)="filterUpdated($event)" />
-  `,
+  `
 })
 export class FilterInputComponent implements OnInit {
   public currentValue = '';

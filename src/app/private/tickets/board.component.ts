@@ -17,14 +17,13 @@ import { selectTicketBoard } from '@app/core/store/selectors';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [TicketBoardDataSource]
 })
-
 export class TicketBoardComponent {
   board$: Observable<BoardColumn<TicketListItem>[]> = this.boardDataSource.data$;
   filterTerm$: Observable<string> = this.boardDataSource.filterTerm$;
 
-  constructor(private store: Store<AppState>, public boardDataSource: TicketBoardDataSource){
-    this.store.dispatch(loadTicketBoardRequested({ includeClosed: false })); 
-    this.boardDataSource.setDataSource(this.store.select(selectTicketBoard));  
+  constructor(private store: Store<AppState>, public boardDataSource: TicketBoardDataSource) {
+    this.store.dispatch(loadTicketBoardRequested({ includeClosed: false }));
+    this.boardDataSource.setDataSource(this.store.select(selectTicketBoard));
   }
 
   public drop(event: CdkDragDrop<BoardColumn<TicketListItem>>): void {
@@ -34,11 +33,13 @@ export class TicketBoardComponent {
     let newTicketStatusId = event.container.data.id;
     let newTicketStatus = event.container.data.title;
 
-    this.store.dispatch(ticketStatusUpdatedByUser({ 
-      ticket: {...ticket, ticketStatus: newTicketStatus}, 
-      boardColumnIndex: event.currentIndex,
-      newTicketStatusId: newTicketStatusId
-    }));
+    this.store.dispatch(
+      ticketStatusUpdatedByUser({
+        ticket: { ...ticket, ticketStatus: newTicketStatus },
+        boardColumnIndex: event.currentIndex,
+        newTicketStatusId: newTicketStatusId
+      })
+    );
   }
 
   trackTicketBy(index: number, ticket: TicketListItem): number {
@@ -51,7 +52,7 @@ export class TicketBoardComponent {
 
   reload(event: Event) {
     let target = event.target as HTMLInputElement;
-    this.store.dispatch(loadTicketBoardRequested({ includeClosed: target.checked }))
+    this.store.dispatch(loadTicketBoardRequested({ includeClosed: target.checked }));
   }
 
   ngOnDestroy() {

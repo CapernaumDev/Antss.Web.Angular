@@ -19,7 +19,6 @@ import { createUserRequested, loadUserRequested, updateUserRequested } from '@ap
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './user.component.html'
 })
-
 export class UserComponent extends BaseFormComponent implements OnInit {
   FormModes = FormModes;
   public offices$!: Observable<OptionItem[]>;
@@ -32,9 +31,13 @@ export class UserComponent extends BaseFormComponent implements OnInit {
 
   private subscriptions: Subscription[] = [];
 
-  constructor(private formBuilder: FormBuilder, private apiService: ApiService, 
-    private router: Router, private route: ActivatedRoute,
-    private store: Store<AppState>) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private apiService: ApiService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private store: Store<AppState>
+  ) {
     super();
 
     this.offices$ = this.store.select(selectOffices);
@@ -44,7 +47,7 @@ export class UserComponent extends BaseFormComponent implements OnInit {
 
   onSubmit() {
     if (!super.beforeSubmit()) return;
-    
+
     if (this.formMode == FormModes.Create) {
       this.store.dispatch(createUserRequested({ user: this.form.value }));
     } else {
@@ -53,53 +56,52 @@ export class UserComponent extends BaseFormComponent implements OnInit {
   }
 
   cancelAndReturn() {
-    if (this.form.dirty && !confirm("Are you sure you wish to cancel?")) return;
+    if (this.form.dirty && !confirm('Are you sure you wish to cancel?')) return;
 
-    this.router.navigate(['user-list'])
+    this.router.navigate(['user-list']);
   }
 
   ngOnInit() {
-    this.subscriptions.push(this.editingUser$.pipe(
-      filter(x => x != null)
-    ).subscribe(x => {
-      if (!x || !this.form) return;
+    this.subscriptions.push(
+      this.editingUser$.pipe(filter((x) => x != null)).subscribe((x) => {
+        if (!x || !this.form) return;
 
-      this.form.patchValue(x);
-      this.form.patchValue({userTypeId: x.userTypeId.toString()}); //TODO: string / int mismatch but same numeric id
-    }));
+        this.form.patchValue(x);
+        this.form.patchValue({ userTypeId: x.userTypeId.toString() }); //TODO: string / int mismatch but same numeric id
+      })
+    );
 
-    this.subscriptions.push(this.route.queryParams.subscribe(params => {
-      const routeParams = this.route.snapshot.paramMap;
-      this.userId = Number(routeParams.get('id'));
-      
-      if (this.userId)
-        this.store.dispatch(loadUserRequested({ userId: this.userId }));
-      
-      let editing = this.userId > 0;
-      this.formMode = editing ? FormModes.Edit : FormModes.Create;
-      
-      this.form = this.formBuilder.group({
-        firstName: ['', [Validators.required]],
-        lastName: ['', [Validators.required]],
-        emailAddress: ['', [Validators.required, Validators.email]],
-        userTypeId: ['', [Validators.required]],
-        officeId: ['', [Validators.required]],
-        contactNumber: ['', [Validators.required]],
-        password: ['', Validators.required]
-      });
+    this.subscriptions.push(
+      this.route.queryParams.subscribe((params) => {
+        const routeParams = this.route.snapshot.paramMap;
+        this.userId = Number(routeParams.get('id'));
 
-      if (editing)
-        this.form.controls["password"].removeValidators([Validators.required]);
+        if (this.userId) this.store.dispatch(loadUserRequested({ userId: this.userId }));
 
-      this.formModeDescription = editing ? "Edit" : "Create";
-    }));
+        let editing = this.userId > 0;
+        this.formMode = editing ? FormModes.Edit : FormModes.Create;
+
+        this.form = this.formBuilder.group({
+          firstName: ['', [Validators.required]],
+          lastName: ['', [Validators.required]],
+          emailAddress: ['', [Validators.required, Validators.email]],
+          userTypeId: ['', [Validators.required]],
+          officeId: ['', [Validators.required]],
+          contactNumber: ['', [Validators.required]],
+          password: ['', Validators.required]
+        });
+
+        if (editing) this.form.controls['password'].removeValidators([Validators.required]);
+
+        this.formModeDescription = editing ? 'Edit' : 'Create';
+      })
+    );
   }
   ngOnDestroy() {
-    this.subscriptions.forEach(x => {
+    this.subscriptions.forEach((x) => {
       if (!x.closed) {
         x.unsubscribe();
       }
     });
   }
 }
-

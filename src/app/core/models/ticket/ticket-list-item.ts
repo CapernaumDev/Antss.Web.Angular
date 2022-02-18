@@ -5,6 +5,6 @@ export class TicketListItem {
   ticketStatus!: string;
   description!: string;
   title!: string;
-  
+
   animation!: string | null;
 }

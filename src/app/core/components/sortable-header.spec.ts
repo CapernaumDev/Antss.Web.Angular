@@ -11,14 +11,9 @@ describe('SortableHeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ 
-        SortableHeaderComponent
-      ],
-      providers: [
-        MockProvider(SortableDirective)
-      ]
-    })
-    .compileComponents();
+      declarations: [SortableHeaderComponent],
+      providers: [MockProvider(SortableDirective)]
+    }).compileComponents();
   });
 
   beforeEach(() => {

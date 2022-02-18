@@ -1,3 +1,3 @@
 export interface SetFilterEvent {
-    filterTerm: string;
-  }
+  filterTerm: string;
+}

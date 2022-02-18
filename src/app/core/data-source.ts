@@ -1,8 +1,8 @@
-import { isObservable, map, Observable, of, Subject, Subscription, tap, withLatestFrom } from "rxjs";
-import { FilterSourceDirective } from "./directives/filter-source.directive";
-import { SortableDirective } from "./directives/sortable.directive";
-import { SetFilterEvent } from "./interfaces/set-filter-event";
-import { SortChangeEvent, SortDirection } from "./interfaces/sort-change-event";
+import { isObservable, map, Observable, of, Subject, Subscription, tap, withLatestFrom } from 'rxjs';
+import { FilterSourceDirective } from './directives/filter-source.directive';
+import { SortableDirective } from './directives/sortable.directive';
+import { SetFilterEvent } from './interfaces/set-filter-event';
+import { SortChangeEvent, SortDirection } from './interfaces/sort-change-event';
 
 export abstract class DataSource<T> {
   private subs: Subscription[] = [];
@@ -33,7 +33,7 @@ export abstract class DataSource<T> {
   }
 
   destroy() {
-    this.subs.forEach(x => x.unsubscribe());
+    this.subs.forEach((x) => x.unsubscribe());
   }
 
   setDataSource(data: T[] | Observable<T[]>) {
@@ -53,7 +53,7 @@ export abstract class DataSource<T> {
 
   sort(data: any[], column: string, direction: SortDirection) {
     let sorted = [...data].sort((a, b) => {
-      const order = direction === "asc" ? 1 : -1;
+      const order = direction === 'asc' ? 1 : -1;
 
       if (!a[column] && !b[column]) {
         return 0;
@@ -67,12 +67,11 @@ export abstract class DataSource<T> {
         return -1;
       }
 
-      if (typeof(a[column]) === 'number') {
+      if (typeof a[column] === 'number') {
         return order * (a[column] - b[column]);
       } else {
         return order * a[column].localeCompare(b[column], undefined, { sensitivity: 'base' });
       }
-
     });
 
     return sorted;
@@ -85,10 +84,10 @@ export abstract class DataSource<T> {
     const sub = sorter.sortChange
       .pipe(
         withLatestFrom(this.initialData$),
-        tap(([sortEvent]) => this.lastSortEvent = sortEvent),
+        tap(([sortEvent]) => (this.lastSortEvent = sortEvent)),
         map(([sortEvent, data]) => this.sortLogic(sortEvent, data))
       )
-      .subscribe((data) => { 
+      .subscribe((data) => {
         if (this.lastFilterEvent && this.lastFilterEvent.filterTerm) {
           data = this.filterLogic(this.lastFilterEvent, data);
         }
@@ -104,13 +103,13 @@ export abstract class DataSource<T> {
     const sub = filterSource.filterChange
       .pipe(
         withLatestFrom(this.initialData$),
-        tap(([setFilterEvent]) => { 
+        tap(([setFilterEvent]) => {
           this.lastFilterEvent = setFilterEvent;
           this.filterTerm.next(setFilterEvent.filterTerm);
-         }),
+        }),
         map(([setFilterEvent, data]) => this.filterLogic(setFilterEvent, data))
       )
-      .subscribe((data) => { 
+      .subscribe((data) => {
         if (this.lastSortEvent) {
           data = this.sortLogic(this.lastSortEvent, data);
         }
@@ -124,7 +123,7 @@ export abstract class DataSource<T> {
 
   private setInitialData(data: T[]) {
     this.inititalDataSubject.next(data);
-    
+
     if (this.lastFilterEvent && this.lastFilterEvent.filterTerm) {
       data = this.filterLogic(this.lastFilterEvent, data);
     }
@@ -136,7 +135,6 @@ export abstract class DataSource<T> {
     this.dataSubject.next(data);
     this.recordCount.next(data.length);
 
-    if (this.onDataUpdated)
-      this.onDataUpdated(data);
+    if (this.onDataUpdated) this.onDataUpdated(data);
   }
 }

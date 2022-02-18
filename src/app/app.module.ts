@@ -34,26 +34,26 @@ import { CustomSerializer } from './core/store/custom-serializer';
     EffectsModule.forRoot([Effects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
-      logOnly: environment.production,
+      logOnly: environment.production
     }),
     StoreRouterConnectingModule.forRoot({
-      serializer: CustomSerializer,
-    }),
+      serializer: CustomSerializer
+    })
   ],
   providers: [
     {
       provide: APP_INITIALIZER,
       multi: true,
       deps: [AppStartup],
-      useFactory: (startupClass: AppStartup) => () => startupClass.startup(),
+      useFactory: (startupClass: AppStartup) => () => startupClass.startup()
     },
     { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     {
       provide: RouteReuseStrategy,
-      useClass: CacheRouteReuseStrategy,
-    },
+      useClass: CacheRouteReuseStrategy
+    }
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

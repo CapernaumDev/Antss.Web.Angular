@@ -6,7 +6,7 @@ import { OptionItem } from '../models/option-item';
 
 @Component({
   selector: 'autocomplete-form-control',
-  templateUrl: "autocomplete-form-control.html",
+  templateUrl: 'autocomplete-form-control.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
@@ -20,9 +20,8 @@ import { OptionItem } from '../models/option-item';
 // Makes ngbTypeahead available as a formcontrol with OptionItem[] as available options
 // TODO: full implementation of formcontrol validation etc
 export class AutocompleteFormControl implements ControlValueAccessor, OnInit {
-
   @ViewChild('inputElement') inputElement!: HTMLElement;
-  @ViewChild('instance', {static: true}) instance!: NgbTypeahead;
+  @ViewChild('instance', { static: true }) instance!: NgbTypeahead;
   focus$ = new Subject<string>();
   click$ = new Subject<string>();
 
@@ -32,8 +31,8 @@ export class AutocompleteFormControl implements ControlValueAccessor, OnInit {
   selectedItem!: OptionItem;
   allItems: OptionItem[] = [];
 
-  onChange = (selectedValue: number) => { };
-  onTouched = () => { };
+  onChange = (selectedValue: number) => {};
+  onTouched = () => {};
   touched = false;
   disabled = false;
 
@@ -45,14 +44,17 @@ export class AutocompleteFormControl implements ControlValueAccessor, OnInit {
     const inputFocus$ = this.focus$;
 
     return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
-      map(term => (term === '' ? this.allItems
-        : this.allItems.filter(x => x.label.toLowerCase().indexOf(term.toLowerCase()) > -1))
-        .slice(0, 10))
+      map((term) =>
+        (term === ''
+          ? this.allItems
+          : this.allItems.filter((x) => x.label.toLowerCase().indexOf(term.toLowerCase()) > -1)
+        ).slice(0, 10)
+      )
     );
-  }
+  };
 
   ngOnInit(): void {
-    this.optionItems.subscribe(x => this.allItems = x);
+    this.optionItems.subscribe((x) => (this.allItems = x));
   }
 
   onSelect($event: any, input: any) {

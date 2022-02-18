@@ -15,9 +15,8 @@ import { LoginResult } from './models/login-result';
 @Injectable({
   providedIn: 'root'
 })
-
 export class ApiService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   login(loginCredential: LoginCredential): Observable<LoginResult> {
     return this.http.post<LoginResult>(`${environment.apiUrl}/Authentication/Login/`, loginCredential);
@@ -28,17 +27,17 @@ export class ApiService {
   }
 
   getTicketList(includeClosed: boolean): Observable<TicketListItem[]> {
-    return this.http.get<TicketListItem[]>(`${environment.apiUrl}/Ticket/List`, 
-      { params: { includeClosed } });
+    return this.http.get<TicketListItem[]>(`${environment.apiUrl}/Ticket/List`, { params: { includeClosed } });
   }
 
   getTicketBoard(includeClosed: boolean): Observable<BoardColumn<TicketListItem>[]> {
-    return this.http.get<BoardColumn<TicketListItem>[]>(`${environment.apiUrl}/Ticket/Board`, 
-    { params: { includeClosed } });
+    return this.http.get<BoardColumn<TicketListItem>[]>(`${environment.apiUrl}/Ticket/Board`, {
+      params: { includeClosed }
+    });
   }
 
   loadUser(userId: number): Observable<User> {
-    return this.http.get<User>(`${environment.apiUrl}/User/Get`, { params: { id: userId }});
+    return this.http.get<User>(`${environment.apiUrl}/User/Get`, { params: { id: userId } });
   }
 
   createUser(user: User): Observable<PostResult> {

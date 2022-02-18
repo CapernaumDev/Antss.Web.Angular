@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Router } from "@angular/router"
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Editor } from 'ngx-editor';
 import { BaseFormComponent } from '@app/core/components/base-form-component';
@@ -17,7 +17,6 @@ import { createTicketRequested, formCancelled } from '@app/core/store/actions-ui
   templateUrl: './create-ticket.component.html',
   styleUrls: ['./create-ticket.component.css']
 })
-
 export class CreateTicketComponent extends BaseFormComponent implements OnInit {
   editor!: Editor;
   currentUser$: Observable<CurrentUser | null>;
@@ -37,7 +36,7 @@ export class CreateTicketComponent extends BaseFormComponent implements OnInit {
   }
 
   cancelAndReturn() {
-    if (this.form.dirty && !confirm("Are you sure you wish to cancel?")) return;
+    if (this.form.dirty && !confirm('Are you sure you wish to cancel?')) return;
 
     this.store.dispatch(formCancelled({ defaultRedirect: 'ticket-list' }));
   }
@@ -56,4 +55,3 @@ export class CreateTicketComponent extends BaseFormComponent implements OnInit {
     this.editor.destroy();
   }
 }
-

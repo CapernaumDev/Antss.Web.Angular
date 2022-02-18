@@ -15,12 +15,12 @@ export class PreventDoubleSubmitDirective implements OnInit, OnDestroy {
   private submissions = new Subject();
   private subscription!: Subscription;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
-    this.subscription = this.submissions.pipe(
-      throttleTime(this.throttleTime)
-    ).subscribe(e => this.emitThrottledSubmission(e));
+    this.subscription = this.submissions
+      .pipe(throttleTime(this.throttleTime))
+      .subscribe((e) => this.emitThrottledSubmission(e));
   }
 
   emitThrottledSubmission(e: any) {
@@ -36,7 +36,7 @@ export class PreventDoubleSubmitDirective implements OnInit, OnDestroy {
     event.stopPropagation();
     event.preventDefault();
     this.submissions.next(event);
-    
+
     return false;
   }
 }

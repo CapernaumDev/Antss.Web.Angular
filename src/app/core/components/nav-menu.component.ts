@@ -25,8 +25,7 @@ export class NavMenuComponent implements OnInit {
     this.currentUser$ = this.store.select(selectCurrentUser);
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   collapse() {
     this.isExpanded = false;

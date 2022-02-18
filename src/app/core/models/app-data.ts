@@ -1,7 +1,7 @@
-import { OptionItem } from "./option-item";
+import { OptionItem } from './option-item';
 
 export class AppData {
-  offices!: OptionItem[]
-  userTypes!: OptionItem[]
-  assignableUsers!: OptionItem[]
+  offices!: OptionItem[];
+  userTypes!: OptionItem[];
+  assignableUsers!: OptionItem[];
 }

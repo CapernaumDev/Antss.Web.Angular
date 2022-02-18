@@ -8,12 +8,12 @@ import { selectCurrentUser } from './store/selectors';
 
 @Injectable()
 export class AuthenticationInterceptor implements HttpInterceptor {
-  constructor(private store: Store<AppState>) { }
+  constructor(private store: Store<AppState>) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return this.store.select(selectCurrentUser).pipe(take(1),
-      switchMap(user => {
-
+    return this.store.select(selectCurrentUser).pipe(
+      take(1),
+      switchMap((user) => {
         const newRequest = request.clone({
           setHeaders: {
             Authorization: `Basic ${user?.accessToken}`
@@ -21,7 +21,7 @@ export class AuthenticationInterceptor implements HttpInterceptor {
         });
 
         return next.handle(newRequest);
-      })      
-    )
+      })
+    );
   }
 }

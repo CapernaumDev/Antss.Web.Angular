@@ -4,9 +4,9 @@ import { By } from '@angular/platform-browser';
 import { FilterSourceDirective } from './filter-source.directive';
 
 @Component({
-  template: `<input filterSource/>`
+  template: `<input filterSource />`
 })
-class TestComponent { }
+class TestComponent {}
 
 describe('FilterSourceDirective', () => {
   let directiveInstance: FilterSourceDirective;
@@ -15,11 +15,8 @@ describe('FilterSourceDirective', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ 
-        TestComponent, FilterSourceDirective
-      ]
-    })
-    .compileComponents();
+      declarations: [TestComponent, FilterSourceDirective]
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -37,5 +34,4 @@ describe('FilterSourceDirective', () => {
 
     expect(directiveInstance.filterChange.emit).toHaveBeenCalledOnceWith({ filterTerm: 'abc' });
   });
-
 });

@@ -2,10 +2,7 @@
 
 import 'zone.js/testing';
 import { getTestBed } from '@angular/core/testing';
-import {
-  BrowserDynamicTestingModule,
-  platformBrowserDynamicTesting
-} from '@angular/platform-browser-dynamic/testing';
+import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MockInstance, ngMocks } from 'ng-mocks';
@@ -22,23 +19,23 @@ jasmine.getEnv().addReporter({
   specDone: MockInstance.restore,
   specStarted: MockInstance.remember,
   suiteDone: MockInstance.restore,
-  suiteStarted: MockInstance.remember,
+  suiteStarted: MockInstance.remember
 });
 
 declare const require: {
-  context(path: string, deep?: boolean, filter?: RegExp): {
+  context(
+    path: string,
+    deep?: boolean,
+    filter?: RegExp
+  ): {
     keys(): string[];
     <T>(id: string): T;
   };
 };
 
 // First, initialize the Angular testing environment.
-getTestBed().initTestEnvironment([
-    BrowserDynamicTestingModule,
-    FontAwesomeModule,
-    RouterTestingModule,
-    FormsModule
-  ],
+getTestBed().initTestEnvironment(
+  [BrowserDynamicTestingModule, FontAwesomeModule, RouterTestingModule, FormsModule],
   platformBrowserDynamicTesting()
 );
 // Then we find all the tests.

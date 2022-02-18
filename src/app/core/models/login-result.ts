@@ -1,4 +1,4 @@
-import { CurrentUser } from "./user/current-user";
+import { CurrentUser } from './user/current-user';
 
 export class LoginResult {
   constructor(user: CurrentUser, accessToken: string) {
@@ -7,5 +7,5 @@ export class LoginResult {
   }
 
   user: CurrentUser;
-  accessToken: string
+  accessToken: string;
 }

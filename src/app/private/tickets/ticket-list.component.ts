@@ -17,16 +17,15 @@ import confirmationHighlightAnimation from '@app/core/animations/confirmation-hi
   animations: confirmationHighlightAnimation,
   providers: [TicketListDataSource]
 })
-
 export class TicketListComponent {
   tickets$: Observable<TicketListItem[]> = this.ticketsDataSource.data$;
   filterTerm$: Observable<string> = this.ticketsDataSource.filterTerm$;
-  
+
   @ViewChild(SortableDirective) sorter!: SortableDirective;
 
-  constructor(private store: Store<AppState>, public ticketsDataSource: TicketListDataSource) { 
-    this.store.dispatch(loadTicketsRequested({ includeClosed: false })); 
-    this.ticketsDataSource.setDataSource(this.store.select(selectTicketList));  
+  constructor(private store: Store<AppState>, public ticketsDataSource: TicketListDataSource) {
+    this.store.dispatch(loadTicketsRequested({ includeClosed: false }));
+    this.ticketsDataSource.setDataSource(this.store.select(selectTicketList));
   }
 
   ngAfterViewInit() {
@@ -39,12 +38,11 @@ export class TicketListComponent {
 
   reload(event: Event) {
     let target = event.target as HTMLInputElement;
-    this.store.dispatch(loadTicketsRequested({ includeClosed: target.checked }))
+    this.store.dispatch(loadTicketsRequested({ includeClosed: target.checked }));
   }
 
   animationComplete(animation: string | null, ticketId: number) {
-    if (animation)
-      this.store.dispatch(ticketAnimationPlayed({ ticketId: ticketId }));
+    if (animation) this.store.dispatch(ticketAnimationPlayed({ ticketId: ticketId }));
   }
 
   ngOnDestroy() {

@@ -9,29 +9,27 @@ import { selectCurrentUser } from './store/selectors';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
-  constructor(
-    private router: Router,
-    private store: Store<AppState>
-  ) { }
+  constructor(private router: Router, private store: Store<AppState>) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    return new Observable<boolean>(obs => {
-      let routeRole = route.data?.["role"] as string;
+    return new Observable<boolean>((obs) => {
+      let routeRole = route.data?.['role'] as string;
       let redirectAfterLogin = route.url.toString();
 
-      this.store.select(selectCurrentUser).pipe(
-        take(1)
-      ).subscribe(user => {
-        if (!user) {
-          this.store.dispatch(setAfterLoginRedirect({ url: redirectAfterLogin }));
-          this.router.navigate(['login']);
-          obs.next(false);
-        } else if (routeRole && routeRole.includes('Admin') && !user.isAdmin) {
-          obs.next(false);
-        } else {
-          obs.next(true);
-        }
-      })
+      this.store
+        .select(selectCurrentUser)
+        .pipe(take(1))
+        .subscribe((user) => {
+          if (!user) {
+            this.store.dispatch(setAfterLoginRedirect({ url: redirectAfterLogin }));
+            this.router.navigate(['login']);
+            obs.next(false);
+          } else if (routeRole && routeRole.includes('Admin') && !user.isAdmin) {
+            obs.next(false);
+          } else {
+            obs.next(true);
+          }
+        });
     });
   }
 }
