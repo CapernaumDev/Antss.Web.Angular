@@ -21,9 +21,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { CustomSerializer } from './core/store/custom-serializer';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     RouterModule,
@@ -31,28 +29,31 @@ import { CustomSerializer } from './core/store/custom-serializer';
     CoreModule,
     PublicModule,
     PrivateModule,
-    StoreModule.forRoot({ }),
+    StoreModule.forRoot({}),
     StoreModule.forFeature('app', Reducers, { metaReducers }),
     EffectsModule.forRoot([Effects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
-      logOnly: environment.production
+      logOnly: environment.production,
     }),
     StoreRouterConnectingModule.forRoot({
       serializer: CustomSerializer,
-    })
+    }),
   ],
   providers: [
-    { provide: APP_INITIALIZER, multi: true, deps: [AppStartup], useFactory: (startupClass: AppStartup) => () => startupClass.startup() },
+    {
+      provide: APP_INITIALIZER,
+      multi: true,
+      deps: [AppStartup],
+      useFactory: (startupClass: AppStartup) => () => startupClass.startup(),
+    },
     { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    { 
+    {
       provide: RouteReuseStrategy,
-      useClass: CacheRouteReuseStrategy
-    }
+      useClass: CacheRouteReuseStrategy,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-
-export class AppModule { 
-}
+export class AppModule {}

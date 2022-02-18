@@ -31,11 +31,4 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
   }
-  
-  sendMessage() {
-    this.http.get('https://localhost:7210/api/hub')
-    .subscribe(res => {
-      console.log(res);
-    })
-  }
 }

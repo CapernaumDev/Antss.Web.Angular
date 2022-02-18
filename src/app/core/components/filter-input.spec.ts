@@ -11,14 +11,9 @@ describe('FilterInputComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ 
-        FilterInputComponent
-      ],
-      providers: [
-        MockProvider(FilterSourceDirective)
-      ]
-    })
-    .compileComponents();
+      declarations: [FilterInputComponent],
+      providers: [MockProvider(FilterSourceDirective)],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -32,9 +27,7 @@ describe('FilterInputComponent', () => {
   });
 
   it('should call filter on the filter source with what the user typed after 300ms', fakeAsync(() => {
-    const inputElement = fixture.debugElement.query(
-      By.css('input')
-    ).nativeElement;
+    const inputElement = fixture.debugElement.query(By.css('input')).nativeElement;
 
     inputElement.value = 'abc';
     inputElement.dispatchEvent(new Event('input'));
@@ -44,9 +37,7 @@ describe('FilterInputComponent', () => {
   }));
 
   it('should not immediately call filter on the filter source when the user inputs', () => {
-    const inputElement = fixture.debugElement.query(
-      By.css('input')
-    ).nativeElement;
+    const inputElement = fixture.debugElement.query(By.css('input')).nativeElement;
 
     inputElement.value = 'abc';
     inputElement.dispatchEvent(new Event('input'));

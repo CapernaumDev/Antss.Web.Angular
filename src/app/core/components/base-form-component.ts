@@ -2,17 +2,18 @@ import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
-    template: ''
+  template: '',
 })
-
 export class BaseFormComponent {
-    saving = false;
-    submitted = false;
-    form!: FormGroup;
-    
-  get f() { return this.form.controls; }
+  saving = false;
+  submitted = false;
+  form!: FormGroup;
 
-  beforeSubmit() : boolean {
+  get f() {
+    return this.form.controls;
+  }
+
+  beforeSubmit(): boolean {
     this.submitted = true;
     if (this.saving) return false;
     this.saving = true;
