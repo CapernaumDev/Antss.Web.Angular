@@ -1,6 +1,6 @@
 <body>
   <app-nav-menu></app-nav-menu>
   <div class="container-xxl">
-    <router-outlet></router-outlet>
+    <router-outlet (activate)="onRouteActivated()" (attach)="onRouteActivated()"></router-outlet>
   </div>
 </body>
