@@ -1,11 +1,18 @@
 <div class="container p-2">
   <pre></pre>
-  <div class="alert alert-info"><b>{{formModeDescription}} User</b></div>
+  <div class="alert alert-info">
+    <b>{{ formModeDescription }} User</b>
+  </div>
   <form preventDoubleSubmit (throttledOnSubmit)="onSubmit()" class="row g-3" [formGroup]="form">
     <div class="col-md-6">
       <label for="inputFirstName" class="form-label">First Name</label>
-      <input type="text" formControlName="firstName" class="form-control"
-             [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" id="inputFirstName" />
+      <input
+        type="text"
+        formControlName="firstName"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"
+        id="inputFirstName"
+      />
       <div *ngIf="submitted && f.firstName.errors" class="text-danger">
         <div *ngIf="f.firstName.errors.required">
           <small>First Name is required</small>
@@ -14,8 +21,13 @@
     </div>
     <div class="col-md-6">
       <label for="inputLastName" class="form-label">Last Name</label>
-      <input type="text" formControlName="lastName" class="form-control"
-             [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" id="inputLastName" />
+      <input
+        type="text"
+        formControlName="lastName"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }"
+        id="inputLastName"
+      />
       <div *ngIf="submitted && f.lastName.errors" class="text-danger">
         <div *ngIf="f.lastName.errors.required">
           <small>Last Name is required</small>
@@ -24,8 +36,14 @@
     </div>
     <div class="col-md-6">
       <label for="inputEmailAddress" class="form-label">Email</label>
-      <input type="email" autocomplete="new-password" formControlName="emailAddress" class="form-control"
-             [ngClass]="{ 'is-invalid': submitted && f.emailAddress.errors }" id="inputEmailAddress">
+      <input
+        type="email"
+        autocomplete="new-password"
+        formControlName="emailAddress"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.emailAddress.errors }"
+        id="inputEmailAddress"
+      />
       <div *ngIf="submitted && f.emailAddress.errors" class="text-danger">
         <div *ngIf="f.emailAddress.errors.required">
           <small>Email is required</small>
@@ -37,8 +55,14 @@
     </div>
     <div class="col-6" *ngIf="this.formMode == FormModes.Create">
       <label for="inputPassword" class="form-label">Password</label>
-      <input type="password" autocomplete="new-password" formControlName="password" class="form-control"
-             [ngClass]="{ 'is-invalid': submitted && f.emailAddress.errors }" id="inputPassword">
+      <input
+        type="password"
+        autocomplete="new-password"
+        formControlName="password"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.emailAddress.errors }"
+        id="inputPassword"
+      />
       <div *ngIf="submitted && f.password.errors" class="text-danger">
         <div *ngIf="f.password.errors.required">
           <small>Password is required</small>
@@ -47,8 +71,13 @@
     </div>
     <div class="col-md-6">
       <label for="inputContactNumber" class="form-label">Contact Number</label>
-      <input type="text" formControlName="contactNumber" class="form-control"
-             [ngClass]="{ 'is-invalid': submitted && f.contactNumber.errors }" id="inputContactNumber" />
+      <input
+        type="text"
+        formControlName="contactNumber"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.contactNumber.errors }"
+        id="inputContactNumber"
+      />
       <div *ngIf="submitted && f.contactNumber.errors" class="text-danger">
         <div *ngIf="f.contactNumber.errors.required">
           <small>Contact Number is required</small>
@@ -57,8 +86,12 @@
     </div>
     <div class="col-md-6">
       <label for="inputOffice" class="form-label">Office</label>
-      <select [ngClass]="{ 'is-invalid': submitted && f.officeId.errors }"
-              formControlName="officeId" class="form-select" id="inputOffice">
+      <select
+        [ngClass]="{ 'is-invalid': submitted && f.officeId.errors }"
+        formControlName="officeId"
+        class="form-select"
+        id="inputOffice"
+      >
         <option *ngFor="let x of offices$ | async" value="{{ x.value }}">
           {{ x.label }}
         </option>
@@ -74,8 +107,14 @@
       <label class="form-label">User Type</label>
       <br />
       <div *ngFor="let x of userTypes$ | async" class="form-check form-check-inline">
-        <input id="userTypeInput{{ x.value }}" type="radio" class="form-check-input"
-               value="{{ x.value }}" name="userTypeId" formControlName="userTypeId">
+        <input
+          id="userTypeInput{{ x.value }}"
+          type="radio"
+          class="form-check-input"
+          value="{{ x.value }}"
+          name="userTypeId"
+          formControlName="userTypeId"
+        />
         <label class="form-check-label" for="userTypeInput{{ x.value }}">{{ x.label }}</label>
       </div>
       <div *ngIf="submitted && f.userTypeId.errors" class="text-danger">
@@ -86,7 +125,7 @@
     </div>
 
     <div class="col-12">
-      <button type="submit" [disabled]="saving" class="btn btn-primary">{{formModeDescription}} User</button>
+      <button type="submit" [disabled]="saving" class="btn btn-primary">{{ formModeDescription }} User</button>
       <button type="button" class="btn btn-outline-dark mx-1" (click)="cancelAndReturn()">Cancel</button>
     </div>
   </form>

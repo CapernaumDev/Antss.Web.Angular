@@ -11,14 +11,7 @@ import { HttpClient } from '@angular/common/http';
   selector: 'app-home',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './home.component.html',
-  animations: [
-    trigger('fade', [ 
-      transition('void => *', [
-        style({ opacity: 0 }), 
-        animate(500, style({opacity: 1}))
-      ]) 
-    ])
-  ]
+  animations: [trigger('fade', [transition('void => *', [style({ opacity: 0 }), animate(500, style({ opacity: 1 }))])])]
 })
 export class HomeComponent implements OnInit {
   public isSigningIn$: Observable<boolean>;
@@ -27,8 +20,7 @@ export class HomeComponent implements OnInit {
   constructor(private store: Store<AppState>, private http: HttpClient) {
     this.isSigningIn$ = this.store.select(selectIsSigningIn);
     this.currentUser$ = this.store.select(selectCurrentUser);
-   }
-
-  ngOnInit() {
   }
+
+  ngOnInit() {}
 }

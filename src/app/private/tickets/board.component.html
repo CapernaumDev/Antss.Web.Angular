@@ -1,33 +1,47 @@
 <div class="root">
-  <filter-section [dataSource]="boardDataSource" subjectNamePlural="Tickets" subjectNameSingular="Ticket" newItemRoute="/create-ticket">
+  <filter-section
+    [dataSource]="boardDataSource"
+    subjectNamePlural="Tickets"
+    subjectNameSingular="Ticket"
+    newItemRoute="/create-ticket"
+  >
     <div class="col">
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" (change)="reload($event)" id="includeClosedInput">
-        <label class="form-check-label" for="includeClosedInput">
-          Include closed tickets
-        </label>
+        <input class="form-check-input" type="checkbox" (change)="reload($event)" id="includeClosedInput" />
+        <label class="form-check-label" for="includeClosedInput"> Include closed tickets </label>
       </div>
     </div>
   </filter-section>
   <div class="board">
     <div class="board-wrapper">
       <div cdkDropList cdkDropListOrientation="horizontal" class="board-columns" cdkDropListGroup>
-        <div cdkDragLockAxis="x" class="board-column"
-          *ngFor="let column of board$ | async; index as i; trackBy: trackColumnBy" cdkDrag>
+        <div
+          cdkDragLockAxis="x"
+          class="board-column"
+          *ngFor="let column of board$ | async; index as i; trackBy: trackColumnBy"
+          cdkDrag
+        >
           <div class="column-title" cdkDragHandle>
             {{ column.title }}
           </div>
-          <div class="tasks-container" id="{{column.id}}" cdkDropList
-            [cdkDropListData]="column" (cdkDropListDropped)="drop($event)"
-            *ngIf="{filterTerm: (filterTerm$ | async) || ''} as filter">
-            <div board-item *ngFor="let ticket of column.items as TicketListItem; index as i; trackBy: trackTicketBy"
-              [ticket]="ticket" [filterTerm]="filter.filterTerm" cdkDrag>
-            </div>
+          <div
+            class="tasks-container"
+            id="{{ column.id }}"
+            cdkDropList
+            [cdkDropListData]="column"
+            (cdkDropListDropped)="drop($event)"
+            *ngIf="{ filterTerm: (filterTerm$ | async) || '' } as filter"
+          >
+            <div
+              board-item
+              *ngFor="let ticket of column.items as TicketListItem; index as i; trackBy: trackTicketBy"
+              [ticket]="ticket"
+              [filterTerm]="filter.filterTerm"
+              cdkDrag
+            ></div>
           </div>
-
         </div>
       </div>
-
     </div>
   </div>
 </div>

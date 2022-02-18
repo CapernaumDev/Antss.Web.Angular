@@ -7,16 +7,15 @@ import { loginWithCredentials } from '@core/store/actions-ui';
 @Component({
   selector: 'app-login',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './login.component.html',
+  templateUrl: './login.component.html'
 })
-
 export class LoginComponent extends BaseFormComponent implements OnInit {
   userId: number = 0;
   emailAddress!: string;
   password!: string;
 
-  constructor(private formBuilder: FormBuilder, private store: Store) { 
-    super();    
+  constructor(private formBuilder: FormBuilder, private store: Store) {
+    super();
   }
 
   ngOnInit(): void {
@@ -29,6 +28,6 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
   onSubmit() {
     if (!super.beforeSubmit()) return;
 
-    this.store.dispatch(loginWithCredentials( { loginCredential: this.form.value }));
+    this.store.dispatch(loginWithCredentials({ loginCredential: this.form.value }));
   }
 }

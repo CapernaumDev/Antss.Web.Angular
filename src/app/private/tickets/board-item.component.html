@@ -1,6 +1,8 @@
-<div class="task" cdkDragHandle
-[@confirmationHighlight]="ticket.animation" (@confirmationHighlight.done)="animationComplete(ticket.animation)">
-  <ngb-highlight [result]="ticket.title" [term]="filterTerm">
-    
-  </ngb-highlight>
+<div
+  class="task"
+  cdkDragHandle
+  [@confirmationHighlight]="ticket.animation"
+  (@confirmationHighlight.done)="animationComplete(ticket.animation)"
+>
+  <ngb-highlight [result]="ticket.title" [term]="filterTerm"> </ngb-highlight>
 </div>

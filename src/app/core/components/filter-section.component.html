@@ -1,18 +1,12 @@
 <div class="row">
-  <div class="col">
-    Search {{subjectNamePlural}}: <span filterInput filterSource></span>
-  </div>
-  <ng-content>
-    
-  </ng-content>
-  <div class="col-auto text-end">
-    Showing {{recordCount$ | async}} {{subjectNamePlural}}
-  </div>
+  <div class="col">Search {{ subjectNamePlural }}: <span filterInput filterSource></span></div>
+  <ng-content> </ng-content>
+  <div class="col-auto text-end">Showing {{ recordCount$ | async }} {{ subjectNamePlural }}</div>
   <div class="col-auto text-end">
     <a [routerLink]="newItemRoute">
       <button class="btn btn-sm btn-outline-primary link-button">
-        <fa-icon [icon]="faPlusSquare" title="Create {{subjectNameSingular}}"></fa-icon>
-      </button> 
+        <fa-icon [icon]="faPlusSquare" title="Create {{ subjectNameSingular }}"></fa-icon>
+      </button>
     </a>
   </div>
 </div>

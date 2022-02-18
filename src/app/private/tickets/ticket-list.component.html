@@ -1,11 +1,14 @@
 <div>
-  <filter-section [dataSource]="ticketsDataSource" subjectNamePlural="Tickets" subjectNameSingular="Ticket" newItemRoute="/create-ticket">
+  <filter-section
+    [dataSource]="ticketsDataSource"
+    subjectNamePlural="Tickets"
+    subjectNameSingular="Ticket"
+    newItemRoute="/create-ticket"
+  >
     <div class="col">
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" (change)="reload($event)" id="includeClosedInput">
-        <label class="form-check-label" for="includeClosedInput">
-          Include closed tickets
-        </label>
+        <input class="form-check-input" type="checkbox" (change)="reload($event)" id="includeClosedInput" />
+        <label class="form-check-label" for="includeClosedInput"> Include closed tickets </label>
       </div>
     </div>
   </filter-section>
@@ -20,7 +23,8 @@
         <th>Title</th>
       </tr>
     </thead>
-    <tbody *ngIf="{filterTerm: (filterTerm$ | async) || ''} as filter"> <!--TODO: ngrxPush Pipe / ngrxLet  -->
+    <tbody *ngIf="{ filterTerm: (filterTerm$ | async) || '' } as filter">
+      <!--TODO: ngrxPush Pipe / ngrxLet  -->
       <tr *ngFor="let x of tickets$ | async; index as i; trackBy: trackTicketBy">
         <!-- NB! animations on tds because animation on *ngFor element or preceeding ng-container causes change
           detection problem when component is reloaded from previously stored route (table displays rows no longer 

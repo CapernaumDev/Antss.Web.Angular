@@ -10,10 +10,7 @@ import { HomeComponent } from './home.component';
 import { CoreModule } from '@app/core/core.module';
 
 @NgModule({
-  declarations: [
-    LoginComponent,
-    HomeComponent
-  ],
+  declarations: [LoginComponent, HomeComponent],
   imports: [
     CommonModule,
     CoreModule,
@@ -25,9 +22,6 @@ import { CoreModule } from '@app/core/core.module';
       { path: 'login', component: LoginComponent }
     ])
   ],
-  exports: [
-    LoginComponent,
-    HomeComponent
-  ]
+  exports: [LoginComponent, HomeComponent]
 })
-export class PublicModule { }
+export class PublicModule {}

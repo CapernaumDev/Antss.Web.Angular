@@ -2,8 +2,15 @@
   <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
     <div class="container-xxl">
       <a class="navbar-brand" [routerLink]="['/']">ANTSS Helpdesk</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
-        aria-label="Toggle navigation" [attr.aria-expanded]="isExpanded" (click)="toggle()">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target=".navbar-collapse"
+        aria-label="Toggle navigation"
+        [attr.aria-expanded]="isExpanded"
+        (click)="toggle()"
+      >
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="navbar-collapse collapse d-l-inline-flex justify-content-end" [ngClass]="{ show: isExpanded }">
@@ -21,23 +28,22 @@
             <li class="nav-item" *ngIf="user.isLoggedIn" [routerLinkActive]="['link-active']">
               <a class="nav-link text-dark" [routerLink]="['ticket-board']">Board</a>
             </li>
-            <li class="nav-item" *ngIf="user.isLoggedIn" style="padding-right: 45px;">
+            <li class="nav-item" *ngIf="user.isLoggedIn" style="padding-right: 45px">
               <a class="nav-link text-dark" data-test-id="logoutLink" [routerLink]="['/']" (click)="logout()">Logout</a>
             </li>
             <li class="nav-item" *ngIf="user.isLoggedIn" [routerLinkActive]="['link-active']">
               <a [routerLink]="'my-profile'" [title]="user.firstName + ' ' + user.lastName">
                 <button class="btn btn-sm btn-outline-primary link-button">
-                  <fa-icon [icon]="faUserCircle" ></fa-icon>
+                  <fa-icon [icon]="faUserCircle"></fa-icon>
                 </button>
               </a>
             </li>
-            
           </ng-container>
           <li class="nav-item" [routerLinkActive]="['link-active']">
             <a [routerLink]="['create-ticket']" class="envelope-icon">
               <button class="btn btn-sm btn-outline-primary link-button">
                 <fa-icon [icon]="faEnvelope" title="Create Ticket"></fa-icon>
-              </button> 
+              </button>
             </a>
           </li>
           <ng-template #showLogin>

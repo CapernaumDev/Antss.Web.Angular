@@ -3,11 +3,15 @@
   <div class="alert alert-info"><b>Create Ticket</b></div>
   <pre></pre>
   <form preventDoubleSubmit (throttledOnSubmit)="onSubmit()" class="row g-3" [formGroup]="form">
-
     <div class="col-md-12">
       <label for="inputTitle" class="form-label">Title</label>
-      <input type="text" formControlName="title" class="form-control"
-             [ngClass]="{ 'is-invalid': submitted && f.title.errors }" id="inputTitle" />
+      <input
+        type="text"
+        formControlName="title"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.title.errors }"
+        id="inputTitle"
+      />
       <div *ngIf="f.title.errors" class="text-danger">
         <div *ngIf="submitted && f.title.errors.required">
           <small>Title is required</small>
@@ -21,12 +25,14 @@
     <div class="NgxEditor__Wrapper">
       <label for="inputDescription" class="form-label">Description</label>
       <ngx-editor-menu [editor]="editor"></ngx-editor-menu>
-      <ngx-editor [editor]="editor"
-                  [placeholder]="'Describe the issue here...'"
-                  formControlName="description"
-                  class="form-control ngx-editor-form-control"
-                  [ngClass]="{ 'is-invalid': submitted && f.description.errors }"
-                  id="inputDescription"></ngx-editor>
+      <ngx-editor
+        [editor]="editor"
+        [placeholder]="'Describe the issue here...'"
+        formControlName="description"
+        class="form-control ngx-editor-form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.description.errors }"
+        id="inputDescription"
+      ></ngx-editor>
 
       <div *ngIf="submitted && f.description.errors" class="text-danger">
         <div *ngIf="f.description.errors.required">
@@ -38,8 +44,11 @@
     <ng-container *ngIf="currentUser$ | async as user">
       <div class="col-md-6" *ngIf="user.isSupport">
         <label for="inputAssignedTo">Assign To</label>
-        <autocomplete-form-control [optionItems]="assignableUsers$"
-          formControlName="assignedToId" elementId="inputAssignedTo"></autocomplete-form-control>
+        <autocomplete-form-control
+          [optionItems]="assignableUsers$"
+          formControlName="assignedToId"
+          elementId="inputAssignedTo"
+        ></autocomplete-form-control>
       </div>
     </ng-container>
 
@@ -48,5 +57,4 @@
       <button type="button" class="btn btn-outline-dark mx-1" (click)="cancelAndReturn()">Cancel</button>
     </div>
   </form>
-
 </div>

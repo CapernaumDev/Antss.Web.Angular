@@ -1,17 +1,23 @@
 <div>
-  <filter-section [dataSource]="usersDataSource" subjectNamePlural="Users" subjectNameSingular="User" newItemRoute="/user"></filter-section>
+  <filter-section
+    [dataSource]="usersDataSource"
+    subjectNamePlural="Users"
+    subjectNameSingular="User"
+    newItemRoute="/user"
+  ></filter-section>
   <pre></pre>
   <table sortable class="table table-striped">
     <thead class="table-dark">
       <tr>
         <th sortHeader ref="firstName">First Name</th>
-        <th sortHeader ref=lastName>Last Name</th>
+        <th sortHeader ref="lastName">Last Name</th>
         <th sortHeader ref="userType">Type</th>
         <th sortHeader ref="officeName">Office</th>
         <th>Edit</th>
       </tr>
     </thead>
-    <tbody *ngIf="{filterTerm: (filterTerm$ | async) || ''} as filter"> <!--TODO: ngrxPush Pipe / ngrxLet  --> 
+    <tbody *ngIf="{ filterTerm: (filterTerm$ | async) || '' } as filter">
+      <!--TODO: ngrxPush Pipe / ngrxLet  -->
       <tr *ngFor="let x of users$ | async; index as i; trackBy: trackUserBy">
         <td><ngb-highlight [result]="x.firstName" [term]="filter.filterTerm"></ngb-highlight></td>
         <td><ngb-highlight [result]="x.lastName" [term]="filter.filterTerm"></ngb-highlight></td>
