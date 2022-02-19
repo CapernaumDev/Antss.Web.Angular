@@ -4,7 +4,7 @@
 ## Front end for Antss helpdesk application
 ## Angular 12 sample application zoneless noop ngrx push pipe server push
 
-* Angular without zone.js and zero manual change detection
+* Angular without zone.js and (almost!) zero manual change detection
 * ngrx store
 * ngrx push pipe replacing async pipe
 * signalR integration for server push events
