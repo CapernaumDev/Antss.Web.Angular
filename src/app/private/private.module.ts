@@ -8,7 +8,7 @@ import { NgxEditorModule } from 'ngx-editor';
 import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { CoreModule } from '@app/core/core.module';
-import { AuthGuard } from '@app/core/authentication.guard';
+import { AuthGuard } from '@app/core/auth/authentication.guard';
 import { UserComponent } from './admin/user.component';
 import { UserListComponent } from './admin/user-list.component';
 import { TicketListComponent } from './tickets/ticket-list.component';

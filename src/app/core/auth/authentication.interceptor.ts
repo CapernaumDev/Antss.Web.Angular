@@ -3,8 +3,8 @@ import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/c
 import { Observable } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
-import { AppState } from './store/app.state';
-import { selectCurrentUser } from './store/selectors';
+import { AppState } from '../store/app.state';
+import { selectCurrentUser } from '../store/selectors';
 
 @Injectable()
 export class AuthenticationInterceptor implements HttpInterceptor {

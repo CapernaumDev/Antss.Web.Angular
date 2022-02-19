@@ -42,6 +42,7 @@ export class TicketListComponent implements AfterViewInit, OnDestroy {
   }
 
   animationComplete(animation: string | null, ticketId: number) {
+    if (animation) console.log('list animationComplete: ' + animation + ' ' + ticketId);
     if (animation) this.store.dispatch(ticketAnimationPlayed({ ticketId: ticketId }));
   }
 

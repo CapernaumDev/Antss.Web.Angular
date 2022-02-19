@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
-import { ApiService } from '@core/api.service';
 import { FormModes } from '@app/core/enums/form-modes';
 import { User } from '@app/core/models/user/user';
 import { OptionItem } from '@core/models/option-item';
@@ -33,7 +32,6 @@ export class UserComponent extends BaseFormComponent implements OnInit, OnDestro
 
   constructor(
     private formBuilder: FormBuilder,
-    private apiService: ApiService,
     private router: Router,
     private route: ActivatedRoute,
     private store: Store<AppState>
@@ -62,6 +60,7 @@ export class UserComponent extends BaseFormComponent implements OnInit, OnDestro
   }
 
   ngOnInit() {
+    //TODO: see what of these subs can be push pipes
     this.subscriptions.push(
       this.editingUser$.pipe(filter((x) => x != null)).subscribe((x) => {
         if (!x || !this.form) return;

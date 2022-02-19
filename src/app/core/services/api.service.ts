@@ -1,16 +1,16 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, take } from 'rxjs';
-import { User } from './models/user/user';
-import { CreateTicket } from './models/ticket/create-ticket';
-import { TicketListItem } from './models/ticket/ticket-list-item';
+import { User } from '../models/user/user';
+import { CreateTicket } from '../models/ticket/create-ticket';
+import { TicketListItem } from '../models/ticket/ticket-list-item';
 import { environment } from '@environments/environment';
-import { PostResult } from './models/post-result';
-import { UserListItem } from './models/user/user-list-item';
-import { BoardColumn } from './models/board-column';
-import { UpdateTicketStatus } from './models/ticket/update-ticket-status';
-import { LoginCredential } from './models/login-credential';
-import { LoginResult } from './models/login-result';
+import { PostResult } from '../models/post-result';
+import { UserListItem } from '../models/user/user-list-item';
+import { BoardColumn } from '../models/board-column';
+import { UpdateTicketStatus } from '../models/ticket/update-ticket-status';
+import { LoginCredential } from '../models/login-credential';
+import { LoginResult } from '../models/login-result';
 
 @Injectable({
   providedIn: 'root'

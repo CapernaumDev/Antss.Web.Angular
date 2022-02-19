@@ -3,9 +3,9 @@ import { AuthGuard } from './authentication.guard';
 import { Router } from '@angular/router';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { AppState } from './store/app.state';
-import { selectCurrentUser } from './store/selectors';
-import { CurrentUser } from './models/user/current-user';
+import { AppState } from '../store/app.state';
+import { selectCurrentUser } from '../store/selectors';
+import { CurrentUser } from '../models/user/current-user';
 
 describe('AuthGuard', () => {
   let mockStore: MockStore<AppState>;

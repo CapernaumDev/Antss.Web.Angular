@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '@environments/environment';
 import * as signalR from '@microsoft/signalr';
 import { Store } from '@ngrx/store';
-import { AppState } from './store/app.state';
+import { AppState } from '../store/app.state';
 import {
   setInitialAppData,
   ticketCreated,
@@ -10,8 +10,8 @@ import {
   updateAssignableUsers,
   userCreated,
   userUpdated
-} from './store/actions-push';
-import { TicketListItem } from './models/ticket/ticket-list-item';
+} from '../store/actions-push';
+import { TicketListItem } from '../models/ticket/ticket-list-item';
 
 @Injectable({
   providedIn: 'root'
