@@ -14,9 +14,7 @@ describe('SortableHeaderComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [SortableHeaderComponent],
-      providers: [
-        MockProvider(SortableDirective, { direction$: of('asc' as SortDirection), active$: of('componentRef') })
-      ]
+      providers: [MockProvider(SortableDirective, { sortChange$: of({ direction: null, column: '' }) })]
     }).compileComponents();
   });
 
@@ -39,6 +37,7 @@ describe('SortableHeaderComponent', () => {
   });
 
   it('should show up arrow when sortable direction is ascending', () => {
+    component.sortable.sortChange$ = of({ direction: 'asc', column: 'componentRef' });
     fixture.debugElement.query(By.css('div')).nativeElement.click();
     fixture.detectChanges();
     let div = fixture.debugElement.query(By.css('[data-test-id="showSortOrder"]')).nativeElement;
@@ -46,7 +45,7 @@ describe('SortableHeaderComponent', () => {
   });
 
   it('should show down arrow when sortable direction is descending', () => {
-    component.sortable.direction$ = of('desc');
+    component.sortable.sortChange$ = of({ direction: 'desc', column: 'componentRef' });
     fixture.debugElement.query(By.css('div')).nativeElement.click();
     fixture.detectChanges();
     let div = fixture.debugElement.query(By.css('[data-test-id="showSortOrder"]')).nativeElement;
@@ -54,7 +53,7 @@ describe('SortableHeaderComponent', () => {
   });
 
   it('should hide arrow when sortable direction is null', () => {
-    component.sortable.direction$ = of(null);
+    component.sortable.sortChange$ = of({ direction: null, column: 'componentRef' });
     fixture.debugElement.query(By.css('div')).nativeElement.click();
     fixture.detectChanges();
     let div = fixture.debugElement.query(By.css('[data-test-id="showSortOrder"]')).nativeElement;

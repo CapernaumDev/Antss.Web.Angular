@@ -8,12 +8,13 @@ import { SortableDirective } from '@app/core/directives/sortable.directive';
     <div class="sort-col">
       <ng-content></ng-content>
       <div
+        *ngrxLet="sortable.sortChange$ as sort"
         data-test-id="showSortOrder"
         [ngClass]="{
           arrow: true,
-          hide: (sortable.active$ | ngrxPush) !== ref || (sortable.direction$ | ngrxPush) === null,
-          asc: (sortable.active$ | ngrxPush) === ref && (sortable.direction$ | ngrxPush) === 'asc',
-          desc: (sortable.active$ | ngrxPush) === ref && (sortable.direction$ | ngrxPush) === 'desc'
+          hide: sort.column !== ref || sort.direction === null,
+          asc: sort.column === ref && sort.direction === 'asc',
+          desc: sort.column === ref && sort.direction === 'desc'
         }"
       >
         🡡

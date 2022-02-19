@@ -1,37 +1,42 @@
-import { Directive, EventEmitter, Output } from '@angular/core';
-import { BehaviorSubject, pipe, shareReplay, take, tap, withLatestFrom } from 'rxjs';
+import { Directive, EventEmitter, OnDestroy, Output } from '@angular/core';
+import { BehaviorSubject, Subscription, take } from 'rxjs';
 import { SortChangeEvent, SortDirection } from '../interfaces/sort-change-event';
 
 @Directive({
   selector: '[sortable]'
 })
-export class SortableDirective {
-  private active = new BehaviorSubject<string>('');
-  private direction = new BehaviorSubject<SortDirection | null>(null);
-  active$ = this.active.pipe(shareReplay(1));
-  direction$ = this.direction.pipe(shareReplay(1));
+export class SortableDirective implements OnDestroy {
+  private subscription!: Subscription;
+  private sortChange = new BehaviorSubject<SortChangeEvent>({ column: '', direction: null });
+  sortChange$ = this.sortChange.asObservable();
 
-  @Output() sortChange = new EventEmitter<SortChangeEvent>();
+  @Output() sortChangeEvent = new EventEmitter<SortChangeEvent>();
 
   sort(column: string) {
-    this.active$.pipe(withLatestFrom(this.direction$), take(1)).subscribe(([active, direction]) => {
-      if (active !== column) {
-        this.active.next(column);
+    this.subscription = this.sortChange$.pipe(take(1)).subscribe((sortChange) => {
+      let nextColumn = sortChange.column;
+      if (sortChange.column !== column) {
+        nextColumn = column;
       }
 
       let nextDirection: SortDirection = null;
-      if (direction === null) {
+      if (sortChange.direction === null) {
         nextDirection = 'asc';
-      } else if (direction === 'asc') {
+      } else if (sortChange.direction === 'asc') {
         nextDirection = 'desc';
       }
 
-      this.sortChange.emit({
-        column,
+      const nextSortChange = {
+        column: nextColumn,
         direction: nextDirection
-      });
+      } as SortChangeEvent;
 
-      this.direction.next(nextDirection);
+      this.sortChangeEvent.emit(nextSortChange);
+      this.sortChange.next(nextSortChange);
     });
+  }
+
+  ngOnDestroy(): void {
+    if (!this.subscription.closed) this.subscription.unsubscribe();
   }
 }

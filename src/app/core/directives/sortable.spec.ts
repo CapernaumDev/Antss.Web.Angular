@@ -28,29 +28,35 @@ describe('SortableDirective', () => {
   });
 
   it('should emit sort event with column parameter when sort is called', () => {
-    spyOn(directiveInstance.sortChange, 'emit');
+    spyOn(directiveInstance.sortChangeEvent, 'emit');
     directiveInstance.sort('abc');
     fixture.detectChanges();
 
-    expect(directiveInstance.sortChange.emit).toHaveBeenCalledOnceWith(jasmine.objectContaining({ column: 'abc' }));
+    expect(directiveInstance.sortChangeEvent.emit).toHaveBeenCalledOnceWith(
+      jasmine.objectContaining({ column: 'abc' })
+    );
   });
 
   it('should emit sort event with ascending direction when called first time', () => {
-    spyOn(directiveInstance.sortChange, 'emit');
+    spyOn(directiveInstance.sortChangeEvent, 'emit');
     directiveInstance.sort('abc');
     fixture.detectChanges();
 
-    expect(directiveInstance.sortChange.emit).toHaveBeenCalledOnceWith(jasmine.objectContaining({ direction: 'asc' }));
+    expect(directiveInstance.sortChangeEvent.emit).toHaveBeenCalledOnceWith(
+      jasmine.objectContaining({ direction: 'asc' })
+    );
   });
 
   it('should emit sort event with descending direction when called second time', () => {
     directiveInstance.sort('abc');
     fixture.detectChanges();
-    const spy = spyOn(directiveInstance.sortChange, 'emit');
+    const spy = spyOn(directiveInstance.sortChangeEvent, 'emit');
     directiveInstance.sort('abc');
     fixture.detectChanges();
 
-    expect(directiveInstance.sortChange.emit).toHaveBeenCalledWith(jasmine.objectContaining({ direction: 'desc' }));
+    expect(directiveInstance.sortChangeEvent.emit).toHaveBeenCalledWith(
+      jasmine.objectContaining({ direction: 'desc' })
+    );
   });
 
   it('should emit sort event with null direction when called third time', () => {
@@ -58,11 +64,11 @@ describe('SortableDirective', () => {
     fixture.detectChanges();
     directiveInstance.sort('abc');
     fixture.detectChanges();
-    const spy = spyOn(directiveInstance.sortChange, 'emit');
+    const spy = spyOn(directiveInstance.sortChangeEvent, 'emit');
     directiveInstance.sort('abc');
     fixture.detectChanges();
 
-    expect(directiveInstance.sortChange.emit).toHaveBeenCalledWith(jasmine.objectContaining({ direction: null }));
+    expect(directiveInstance.sortChangeEvent.emit).toHaveBeenCalledWith(jasmine.objectContaining({ direction: null }));
   });
 
   it('should emit sort event with ascending direction when called fourth time', () => {
@@ -72,10 +78,12 @@ describe('SortableDirective', () => {
     fixture.detectChanges();
     directiveInstance.sort('abc');
     fixture.detectChanges();
-    const spy = spyOn(directiveInstance.sortChange, 'emit');
+    const spy = spyOn(directiveInstance.sortChangeEvent, 'emit');
     directiveInstance.sort('abc');
     fixture.detectChanges();
 
-    expect(directiveInstance.sortChange.emit).toHaveBeenCalledOnceWith(jasmine.objectContaining({ direction: 'asc' }));
+    expect(directiveInstance.sortChangeEvent.emit).toHaveBeenCalledOnceWith(
+      jasmine.objectContaining({ direction: 'asc' })
+    );
   });
 });

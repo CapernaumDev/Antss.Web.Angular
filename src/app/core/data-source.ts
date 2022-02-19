@@ -81,7 +81,7 @@ export abstract class DataSource<T> {
   abstract filterLogic(setFilterEvent: SetFilterEvent, data: T[]): T[];
 
   private listenToSortChanges(sorter: SortableDirective) {
-    const sub = sorter.sortChange
+    const sub = sorter.sortChangeEvent
       .pipe(
         withLatestFrom(this.initialData$),
         tap(([sortEvent]) => (this.lastSortEvent = sortEvent)),
