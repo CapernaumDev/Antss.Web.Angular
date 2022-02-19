@@ -1,6 +1,12 @@
 ![Node.js CI](https://github.com/CapernaumDev/Antss.Web.Angular/actions/workflows/node.js.yml/badge.svg)
 
 # Antss.Web.Angular
+## Front end for Antss.API helpdesk application
+
+* Angular without zone.js and zero manual change detection
+* ngrx store
+* ngrx push pipe replacing async pipe
+* signalR integration for server push events
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.2.
 
