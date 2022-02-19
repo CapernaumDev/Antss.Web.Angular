@@ -1,7 +1,8 @@
 ![Node.js CI](https://github.com/CapernaumDev/Antss.Web.Angular/actions/workflows/node.js.yml/badge.svg)
 
 # Antss.Web.Angular
-## Front end for Antss.API helpdesk application
+## Front end for Antss helpdesk application
+## Angular 12 sample application zoneless noop ngrx push pipe server push
 
 * Angular without zone.js and zero manual change detection
 * ngrx store
