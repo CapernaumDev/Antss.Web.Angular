@@ -1,5 +1,5 @@
 import { Directive, EventEmitter, Output } from '@angular/core';
-import { BehaviorSubject, shareReplay, tap } from 'rxjs';
+import { BehaviorSubject, pipe, shareReplay, take, tap, withLatestFrom } from 'rxjs';
 import { SortChangeEvent, SortDirection } from '../interfaces/sort-change-event';
 
 @Directive({
@@ -8,42 +8,30 @@ import { SortChangeEvent, SortDirection } from '../interfaces/sort-change-event'
 export class SortableDirective {
   private active = new BehaviorSubject<string>('');
   private direction = new BehaviorSubject<SortDirection | null>(null);
-  private lastActive?: string | null;
-  private lastDirection?: SortDirection | null;
-  active$ = this.active.pipe(
-    shareReplay(1),
-    tap((x) => (this.lastActive = x))
-  );
-  direction$ = this.direction.pipe(tap((x) => (this.lastDirection = x)));
+  active$ = this.active.pipe(shareReplay(1));
+  direction$ = this.direction.pipe(shareReplay(1));
 
   @Output() sortChange = new EventEmitter<SortChangeEvent>();
 
   sort(column: string) {
-    let direction = this.lastDirection as SortDirection;
+    this.active$.pipe(withLatestFrom(this.direction$), take(1)).subscribe(([active, direction]) => {
+      if (active !== column) {
+        this.active.next(column);
+      }
 
-    //TODO: Sort out this last.. stuff
+      let nextDirection: SortDirection = null;
+      if (direction === null) {
+        nextDirection = 'asc';
+      } else if (direction === 'asc') {
+        nextDirection = 'desc';
+      }
 
-    if (this.lastActive !== column) {
-      this.lastDirection = null;
-      this.direction.next(null);
-      this.active.next(column);
-    }
+      this.sortChange.emit({
+        column,
+        direction: nextDirection
+      });
 
-    if (this.lastDirection === null) {
-      direction = 'asc';
-    } else if (this.lastDirection === 'asc') {
-      direction = 'desc';
-    } else if (this.lastDirection === 'desc') {
-      direction = null;
-    }
-
-    this.sortChange.emit({
-      column,
-      direction
+      this.direction.next(nextDirection);
     });
-
-    this.lastDirection = direction;
-    this.lastActive = column;
-    this.direction.next(direction);
   }
 }
