@@ -4,8 +4,10 @@ import { NavMenuComponent } from '@app/core/components/nav-menu.component';
 import { RouterModule } from '@angular/router';
 import { ReactiveComponentModule } from '@ngrx/component';
 import { FormsModule } from '@angular/forms';
-import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faEnvelope, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons/faEnvelope';
+import { faUserCircle } from '@fortawesome/free-solid-svg-icons/faUserCircle';
 import { BaseFormComponent } from './components/base-form-component';
 import { PreventDoubleSubmitDirective } from './directives/prevent-double-submit.directive';
 import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
@@ -42,7 +44,7 @@ import { FilterSectionComponent } from './components/filter-section.component';
   ]
 })
 export class CoreModule {
-  constructor(library: FaIconLibrary) {
-    library.addIcons(faUserCircle, faEnvelope);
+  constructor() {
+    library.add(faUserCircle, faEnvelope);
   }
 }
