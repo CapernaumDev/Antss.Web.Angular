@@ -1,8 +1,10 @@
-<div
-  class="task"
-  cdkDragHandle
-  [@confirmationHighlight]="ticket.animation"
-  (@confirmationHighlight.done)="animationComplete(ticket.animation)"
->
-  <ngb-highlight [result]="ticket.title" [term]="filterTerm"> </ngb-highlight>
-</div>
+<ng-container *ngrxLet="inSight$ as inSight">
+  <div
+    class="task"
+    cdkDragHandle
+    [@confirmationHighlight]="inSight ? ticket.animation : ''"
+    (@confirmationHighlight.done)="animationComplete(inSight ? ticket.animation : null)"
+  >
+    <ngb-highlight [result]="ticket.title" [term]="filterTerm"> </ngb-highlight>
+  </div>
+</ng-container>

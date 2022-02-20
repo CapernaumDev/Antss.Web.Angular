@@ -97,6 +97,9 @@ export const Reducers = createReducer(
 
   on(SystemActions.ticketAnimationPlayed, (state, { ticketId }) =>
     produce(state, (draft) => {
+      let ticketInTicketListStateCollection = draft.ticketListItems.find((x) => x.id === ticketId);
+      if (ticketInTicketListStateCollection) ticketInTicketListStateCollection.animation = null;
+
       for (let i = 0; i < draft.ticketBoard.length; i++) {
         let foundTicket = draft.ticketBoard[i].items.find((x) => x.id === ticketId);
         if (foundTicket) {

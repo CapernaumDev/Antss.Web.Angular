@@ -24,26 +24,12 @@
       </tr>
     </thead>
     <tbody *ngIf="{ filterTerm: (filterTerm$ | ngrxPush) || '' } as filter">
-      <tr *ngFor="let x of tickets$ | ngrxPush; index as i; trackBy: trackTicketBy">
-        <!-- NB! animations on tds because animation on *ngFor element or preceeding ng-container causes change
-          detection problem when component is reloaded from previously stored route (table displays rows no longer 
-          present in data source). There is no scope in table to add an extra child element to wrap. Maybe make this a grid instead -->
-        <td [@confirmationHighlight]="x.animation" (@confirmationHighlight.done)="animationComplete(x.animation, x.id)">
-          <ngb-highlight [result]="x.id.toString()" [term]="filter.filterTerm"></ngb-highlight>
-        </td>
-        <td [@confirmationHighlight]="x.animation">
-          <ngb-highlight [result]="x.raisedBy" [term]="filter.filterTerm"></ngb-highlight>
-        </td>
-        <td [@confirmationHighlight]="x.animation">
-          <ngb-highlight [result]="x.assignedTo" [term]="filter.filterTerm"></ngb-highlight>
-        </td>
-        <td [@confirmationHighlight]="x.animation">
-          <ngb-highlight [result]="x.ticketStatus" [term]="filter.filterTerm"></ngb-highlight>
-        </td>
-        <td [@confirmationHighlight]="x.animation">
-          <ngb-highlight [result]="x.title" [term]="filter.filterTerm"></ngb-highlight>
-        </td>
-      </tr>
+      <tr
+        ticket-list-item
+        *ngFor="let x of tickets$ | ngrxPush; index as i; trackBy: trackTicketBy"
+        [ticket]="x"
+        [filterTerm]="filter.filterTerm"
+      ></tr>
     </tbody>
   </table>
 </div>

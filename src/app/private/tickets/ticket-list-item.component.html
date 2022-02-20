@@ -1,0 +1,23 @@
+<ng-container *ngrxLet="inSight$ as inSight">
+  <!-- NB! animations on tds because animation on *ngFor element or preceeding ng-container causes change
+    detection problem when component is reloaded from previously stored route (table displays rows no longer 
+    present in data source). There is no scope in table to add an extra child element to wrap. Maybe make this a grid instead -->
+  <td
+    [@confirmationHighlight]="inSight ? ticket.animation : ''"
+    (@confirmationHighlight.done)="animationComplete(inSight ? ticket.animation : null, ticket.id)"
+  >
+    <ngb-highlight [result]="ticket.id.toString()" [term]="filterTerm"></ngb-highlight>
+  </td>
+  <td [@confirmationHighlight]="inSight ? ticket.animation : ''">
+    <ngb-highlight [result]="ticket.raisedBy" [term]="filterTerm"></ngb-highlight>
+  </td>
+  <td [@confirmationHighlight]="inSight ? ticket.animation : ''">
+    <ngb-highlight [result]="ticket.assignedTo" [term]="filterTerm"></ngb-highlight>
+  </td>
+  <td [@confirmationHighlight]="inSight ? ticket.animation : ''">
+    <ngb-highlight [result]="ticket.ticketStatus" [term]="filterTerm"></ngb-highlight>
+  </td>
+  <td [@confirmationHighlight]="inSight ? ticket.animation : ''">
+    <ngb-highlight [result]="ticket.title" [term]="filterTerm"></ngb-highlight>
+  </td>
+</ng-container>

@@ -12,6 +12,7 @@ import { AuthGuard } from '@app/core/auth/authentication.guard';
 import { UserComponent } from './admin/user.component';
 import { UserListComponent } from './admin/user-list.component';
 import { TicketListComponent } from './tickets/ticket-list.component';
+import { TicketListItemComponent } from './tickets/ticket-list-item.component';
 import { MyProfileComponent } from '@app/private/my-profile/my-profile.component';
 import { CreateTicketComponent } from './tickets/create-ticket.component';
 import { TicketBoardComponent } from './tickets/board.component';
@@ -23,6 +24,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     UserComponent,
     UserListComponent,
     TicketListComponent,
+    TicketListItemComponent,
     CreateTicketComponent,
     MyProfileComponent,
     TicketBoardComponent,
