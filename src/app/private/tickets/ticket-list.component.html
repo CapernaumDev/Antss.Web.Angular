@@ -20,14 +20,14 @@
         <th sortHeader ref="raisedBy">Raised By</th>
         <th sortHeader ref="assignedTo">Assigned To</th>
         <th sortHeader ref="ticketStatus">Status</th>
-        <th>Title</th>
+        <th sortHeader ref="title">Title</th>
       </tr>
     </thead>
     <tbody *ngIf="{ filterTerm: (filterTerm$ | ngrxPush) || '' } as filter">
       <tr
         ticket-list-item
-        *ngFor="let x of tickets$ | ngrxPush; index as i; trackBy: trackTicketBy"
-        [ticket]="x"
+        *ngFor="let ticket of tickets$ | ngrxPush; index as i; trackBy: trackTicketBy"
+        [ticket]="ticket"
         [filterTerm]="filter.filterTerm"
       ></tr>
     </tbody>

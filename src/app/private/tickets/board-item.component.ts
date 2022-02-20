@@ -22,7 +22,6 @@ export class TicketBoardItemComponent {
   @Input() filterTerm!: string;
 
   animationComplete(animation: string | null) {
-    if (animation) console.log('board animationComplete: ' + animation + ' ' + this.ticket.id);
     if (animation) this.store.dispatch(ticketAnimationPlayed({ ticketId: this.ticket.id }));
   }
 }

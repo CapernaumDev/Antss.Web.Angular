@@ -22,7 +22,6 @@ export class TicketListItemComponent {
   constructor(private store: Store<AppState>, private visibilityService: VisibilityService, private host: ElementRef) {}
 
   animationComplete(animation: string | null, ticketId: number) {
-    if (animation) console.log('list animationComplete: ' + animation + ' ' + ticketId);
     if (animation) this.store.dispatch(ticketAnimationPlayed({ ticketId: ticketId }));
   }
 }
